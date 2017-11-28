@@ -1,0 +1,8 @@
+{
+  "name": "toxio",
+  "app_id": "d247ab47",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
