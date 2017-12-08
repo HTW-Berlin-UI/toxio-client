@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule, Injectable, Injector } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,6 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { Pro } from '@ionic/pro';
+import { DataExchangeProvider } from '../providers/data-exchange/data-exchange';
 
 const IonicPro = Pro.init('d247ab47', {
     appVersion: '0.0.1'
@@ -36,14 +38,15 @@ export class ToxioErrorHandler implements ErrorHandler {
 
 @NgModule({
     declarations: [MyApp, HomePage],
-    imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+    imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
     bootstrap: [IonicApp],
     entryComponents: [MyApp, HomePage],
     providers: [
         StatusBar,
         SplashScreen,
         IonicErrorHandler,
-        { provide: ErrorHandler, useClass: ToxioErrorHandler }
+        { provide: ErrorHandler, useClass: ToxioErrorHandler },
+        DataExchangeProvider
     ]
 })
 export class AppModule {}

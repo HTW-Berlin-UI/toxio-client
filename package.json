@@ -62,9 +62,6 @@
                 "MAX_STORE": "2"
             }
         },
-        "platforms": [
-            "android",
-            "ios"
-        ]
+        "platforms": ["android", "ios"]
     }
 }

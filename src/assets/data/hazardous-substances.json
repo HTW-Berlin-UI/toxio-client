@@ -1,0 +1,20 @@
+{
+    "status": "success",
+    "data": {
+        "hazardousSubstances": [
+            {
+                "id": 1,
+                "hsNumber": "25000200B",
+                "name": "HI-KOTE® 1 NC",
+                "manufacturer": "LISI AEROSPACE - Blanc Aero Industries.",
+                "active": true,
+                "approved": true,
+                "symbols": ["GHS02", "GHS05", "GHS07", "GHS08"],
+                "hPhrases": ["H226", "H330", "H372"],
+                "pPhrases": ["P305+P351+P338", "P202", "P272", "P273"],
+                "created": "2017-12-08T16:28:33+01:00",
+                "updated": "2017-12-08T16:28:33+01:00"
+            }
+        ]
+    }
+}
