@@ -1,0 +1,45 @@
+page-welcome {
+    .content {
+        background: color($colors, light, base);
+        color: color($colors, dark, base);
+    }
+
+    .splash-bg {
+        position: relative;
+        background: url('../assets/imgs/splashbg.png') no-repeat transparent;
+        background-size: cover;
+        height: 45%;
+        z-index: 1;
+        background-repeat: repeat-x;
+        animation: animatedBackground 70s linear infinite;
+    }
+
+    @keyframes animatedBackground {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: 100% 0;
+        }
+    }
+
+    .splash-info {
+        position: relative;
+        z-index: 2;
+        margin-top: -100px;
+        text-align: center;
+    }
+    .splash-logo {
+        margin: auto;
+        background: url('../assets/imgs/icon.png') repeat transparent;
+        background-size: 100%;
+        width: 200px;
+        height: 200px;
+    }
+    .splash-intro {
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: 80%;
+        margin: auto;
+    }
+}

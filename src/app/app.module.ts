@@ -7,8 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { AppConfig } from './app.config';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { Toxio } from './app.component';
 
 import { Pro } from '@ionic/pro';
 import { DataExchangeProvider } from '../providers/data-exchange/data-exchange';
@@ -39,15 +38,15 @@ export class ToxioErrorHandler implements ErrorHandler {
 }
 
 @NgModule({
-    declarations: [MyApp, HomePage],
+    declarations: [Toxio],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(Toxio),
         HttpClientModule,
         AppConfig
     ],
     bootstrap: [IonicApp],
-    entryComponents: [MyApp, HomePage],
+    entryComponents: [Toxio],
     providers: [
         StatusBar,
         SplashScreen,
