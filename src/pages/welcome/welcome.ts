@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { APP_CONFIG, AppConfig } from '../../app/app.config';
+
+import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 
 /**
  * Generated class for the WelcomePage page.
@@ -17,11 +19,11 @@ import { APP_CONFIG, AppConfig } from '../../app/app.config';
 export class WelcomePage {
     constructor(
         public navCtrl: NavController,
-        @Inject(APP_CONFIG) private config: AppConfig
+        @Inject(APP_CONFIG) private appConfig: AppConfig
     ) {}
 
     start(startAsManager: boolean = false): void {
-        this.config.currentUser.can.addUsage = startAsManager;
-        //this.navCtrl.push('SelectHsPage');
+        this.appConfig.currentUser.can.addUsage = startAsManager;
+        this.navCtrl.push(SELECT_HAZARDOUS_SUBSTANCE_PAGE);
     }
 }

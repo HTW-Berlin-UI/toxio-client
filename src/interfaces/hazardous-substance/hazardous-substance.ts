@@ -1,4 +1,4 @@
-import { Syncable } from './_index';
+import { Syncable } from '../interfaces';
 
 export interface HazardousSubstance extends Syncable {
     id: number;

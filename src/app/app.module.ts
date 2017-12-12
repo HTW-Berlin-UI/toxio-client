@@ -10,7 +10,7 @@ import { AppConfig } from './app.config';
 import { Toxio } from './app.component';
 
 import { Pro } from '@ionic/pro';
-import { DataExchangeProvider } from '../providers/data-exchange/data-exchange';
+import { DataExchangeProvider, NetworkProvider } from '../providers/providers';
 
 const IonicPro = Pro.init('d247ab47', {
     appVersion: '0.0.1'
@@ -52,7 +52,8 @@ export class ToxioErrorHandler implements ErrorHandler {
         SplashScreen,
         IonicErrorHandler,
         { provide: ErrorHandler, useClass: ToxioErrorHandler },
-        DataExchangeProvider
+        DataExchangeProvider,
+        NetworkProvider
     ]
 })
 export class AppModule {}

@@ -3,11 +3,16 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import {
+    WELCOME_PAGE,
+    SELECT_HAZARDOUS_SUBSTANCE_PAGE
+} from '../pages/pages.constants';
+
 @Component({
     templateUrl: 'app.html'
 })
 export class Toxio {
-    rootPage: any = 'WelcomePage';
+    rootPage: string = SELECT_HAZARDOUS_SUBSTANCE_PAGE;
 
     constructor(
         platform: Platform,
