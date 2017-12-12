@@ -4,13 +4,18 @@ import { ErrorHandler, NgModule, Injectable, Injector } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Network } from '@ionic-native/network';
 
 import { AppConfig } from './app.config';
 
 import { Toxio } from './app.component';
 
 import { Pro } from '@ionic/pro';
-import { DataExchangeProvider, NetworkProvider } from '../providers/providers';
+import {
+    DataExchangeProvider,
+    NetworkProvider,
+    UnitOfWork
+} from '../providers/providers';
 
 const IonicPro = Pro.init('d247ab47', {
     appVersion: '0.0.1'
@@ -51,9 +56,11 @@ export class ToxioErrorHandler implements ErrorHandler {
         StatusBar,
         SplashScreen,
         IonicErrorHandler,
+        Network,
         { provide: ErrorHandler, useClass: ToxioErrorHandler },
         DataExchangeProvider,
-        NetworkProvider
+        NetworkProvider,
+        UnitOfWork
     ]
 })
 export class AppModule {}

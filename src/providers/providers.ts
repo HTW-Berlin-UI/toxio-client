@@ -1,4 +1,3 @@
-import { DataExchangeProvider } from './data-exchange/data-exchange';
-import { NetworkProvider } from './network/network';
-
-export { DataExchangeProvider, NetworkProvider };
+export { DataExchangeProvider } from './data-exchange/data-exchange';
+export { NetworkProvider } from './network/network';
+export { UnitOfWork } from './unit-of-work/unit-of-work';

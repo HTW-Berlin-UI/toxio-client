@@ -1,5 +1,3 @@
-import { HazardousSubstance } from './hazardous-substance/hazardous-substance';
-import { Syncable } from './syncable/syncable';
-import { Response } from './response/response';
-
-export { HazardousSubstance, Syncable, Response };
+export { HazardousSubstance } from './hazardous-substance/hazardous-substance';
+export { Syncable } from './syncable/syncable';
+export { Response } from './response/response';
