@@ -14,17 +14,13 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class DataExchangeProvider {
-    constructor(public http: HttpClient) {
-        this.http
-            .get<Response<HazardousSubstance[]>>(
-                '/assets/data/hazardous-substances.json'
-            )
+    constructor(public http: HttpClient) {}
+
+    getHazardousSubstances(): Observable<HazardousSubstance[]> {
+        return this.http
+            .get<Response<HazardousSubstance[]>>('/assets/data/hazardous-substances.json')
             .map(response => response.data.hazardousSubstances)
-            .do(response => {
-                console.log(response);
-            })
-            .catch(this.handleError)
-            .subscribe();
+            .catch(this.handleError);
     }
 
     private handleError(err: HttpErrorResponse) {
@@ -32,9 +28,7 @@ export class DataExchangeProvider {
         if (err.error instanceof Error) {
             errorMessage = `An error occurred: ${err.error.message}`;
         } else {
-            errorMessage = `Server returned code: ${
-                err.status
-            }, error message is: ${err.message}`;
+            errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
         }
         console.error(errorMessage);
         return Observable.throw(errorMessage);

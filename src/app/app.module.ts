@@ -16,7 +16,7 @@ import {
     DataExchangeProvider,
     NetworkProvider,
     UnitOfWork,
-    StorageProvider,
+    DbContext,
     HazardousSubstanceRepository
 } from '../providers/providers';
 
@@ -64,7 +64,7 @@ export class ToxioErrorHandler implements ErrorHandler {
         DataExchangeProvider,
         NetworkProvider,
         UnitOfWork,
-        StorageProvider,
+        DbContext,
         HazardousSubstanceRepository,
         { provide: ErrorHandler, useClass: ToxioErrorHandler }
     ]

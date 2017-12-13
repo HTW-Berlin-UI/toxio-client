@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NetworkProvider } from '../providers';
+import { NetworkProvider, DataExchangeProvider } from '../providers';
+import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository/hazardous-substance-repository';
 
 /*
   Generated class for the UnitOfWorkProvider provider.
@@ -9,7 +10,21 @@ import { NetworkProvider } from '../providers';
 */
 @Injectable()
 export class UnitOfWork {
-    constructor(private network: NetworkProvider) {
-        console.log('Hello UnitOfWorkProvider Provider');
+    constructor(
+        private network: NetworkProvider,
+        private dataExchange: DataExchangeProvider,
+        private hazardousSubstanceRepository: HazardousSubstanceRepository
+    ) {}
+
+    public init(): void {
+        if (this.network.isOnline) {
+            this.updateData();
+        }
+    }
+
+    private updateData(): void {
+        this.dataExchange.getHazardousSubstances().subscribe(hazardousSubstances => {
+            this.hazardousSubstanceRepository.save(...hazardousSubstances);
+        });
     }
 }

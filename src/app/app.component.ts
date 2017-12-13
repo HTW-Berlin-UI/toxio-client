@@ -4,10 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UnitOfWork } from '../providers/providers';
 
-import {
-    WELCOME_PAGE,
-    SELECT_HAZARDOUS_SUBSTANCE_PAGE
-} from '../pages/pages.constants';
+import { WELCOME_PAGE, SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages/pages.constants';
 
 @Component({
     templateUrl: 'app.html'
@@ -24,9 +21,10 @@ export class Toxio {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            statusBar.overlaysWebView(true);
+            statusBar.overlaysWebView(false);
             statusBar.backgroundColorByHexString('#333745');
             splashScreen.hide();
+            unitOfWork.init();
         });
     }
 }

@@ -1,6 +1,6 @@
 export { DataExchangeProvider } from './data-exchange/data-exchange';
 export { NetworkProvider } from './network/network';
-export { StorageProvider } from './storage/storage';
+export { DbContext } from './db-context/db-context';
 export { UnitOfWork } from './unit-of-work/unit-of-work';
 
 export {

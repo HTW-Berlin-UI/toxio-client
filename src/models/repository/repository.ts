@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injector } from '@angular/core';
 import { Syncable } from '../../interfaces/interfaces';
-import { StorageProvider } from '../../providers/providers';
+import { DbContext } from '../../providers/providers';
 
-@Injectable()
 export class Repository<TEntity extends Syncable> {
-    constructor(public identifier: string, private storage: StorageProvider) {
-        console.log(`i am a ${this.identifier} provider`);
+    private dbContext: DbContext;
+
+    constructor(public identifier: string, injector: Injector) {
+        this.dbContext = injector.get(DbContext);
+    }
+
+    public save(...elements: TEntity[]): void {
+        this.dbContext.save(this.identifier, elements);
     }
 }
