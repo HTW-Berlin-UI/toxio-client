@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 import { ErrorHandler, NgModule, Injectable, Injector } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,7 +15,9 @@ import { Pro } from '@ionic/pro';
 import {
     DataExchangeProvider,
     NetworkProvider,
-    UnitOfWork
+    UnitOfWork,
+    StorageProvider,
+    HazardousSubstanceRepository
 } from '../providers/providers';
 
 const IonicPro = Pro.init('d247ab47', {
@@ -48,6 +51,7 @@ export class ToxioErrorHandler implements ErrorHandler {
         BrowserModule,
         IonicModule.forRoot(Toxio),
         HttpClientModule,
+        IonicStorageModule.forRoot(),
         AppConfig
     ],
     bootstrap: [IonicApp],
@@ -57,10 +61,12 @@ export class ToxioErrorHandler implements ErrorHandler {
         SplashScreen,
         IonicErrorHandler,
         Network,
-        { provide: ErrorHandler, useClass: ToxioErrorHandler },
         DataExchangeProvider,
         NetworkProvider,
-        UnitOfWork
+        UnitOfWork,
+        StorageProvider,
+        HazardousSubstanceRepository,
+        { provide: ErrorHandler, useClass: ToxioErrorHandler }
     ]
 })
 export class AppModule {}
