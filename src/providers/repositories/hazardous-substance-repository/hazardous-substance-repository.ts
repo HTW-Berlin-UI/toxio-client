@@ -1,6 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
 import { Repository } from '../../../models/models';
-import { DbContext } from '../../../providers/providers';
 import { HazardousSubstance } from '../../../interfaces/interfaces';
 /*
   Generated class for the HazardousSubstanceRepositoryProvider provider.
@@ -10,7 +9,7 @@ import { HazardousSubstance } from '../../../interfaces/interfaces';
 */
 @Injectable()
 export class HazardousSubstanceRepository extends Repository<HazardousSubstance> {
-    constructor(private injector: Injector) {
-        super('HazardousSubstanceRepository', injector);
+    constructor(injector: Injector) {
+        super('hazardous-substances', injector);
     }
 }

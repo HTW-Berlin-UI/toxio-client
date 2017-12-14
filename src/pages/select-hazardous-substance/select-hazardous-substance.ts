@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HazardousSubstanceRepository } from '../../providers/providers';
+import { HazardousSubstance } from '../../interfaces/interfaces';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the SelectHazardousSubstancePage page.
@@ -10,16 +13,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-select-hazardous-substance',
-  templateUrl: 'select-hazardous-substance.html',
+    selector: 'page-select-hazardous-substance',
+    templateUrl: 'select-hazardous-substance.html'
 })
 export class SelectHazardousSubstancePage {
+    public hazardousSubstances: Observable<HazardousSubstance[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    // public get hazardousSubstances(): Observable<HazardousSubstance[]> {
+    //     return this.hazardousSubstancesRepository.all();
+    // }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SelectHazardousSubstancePage');
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private hazardousSubstancesRepository: HazardousSubstanceRepository
+    ) {}
 
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad SelectHazardousSubstancePage');
+        this.hazardousSubstances = this.hazardousSubstancesRepository.all();
+    }
+
+    search(ev: any) {
+        console.log(ev);
+    }
 }

@@ -10,9 +10,16 @@ import { Syncable } from '../../interfaces/interfaces';
 */
 @Injectable()
 export class DbContext {
-    constructor(private storage: Storage) {}
+    constructor(private storage: Storage) {
+        console.log('DbContext initiated');
+    }
 
     public save(key: string, value: Syncable[]): void {
         this.storage.set(key, value);
+        console.log(`${key} saved to local db`);
+    }
+
+    public load<T>(key: string): Promise<T> {
+        return this.storage.get(key);
     }
 }

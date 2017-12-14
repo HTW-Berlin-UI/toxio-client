@@ -6,13 +6,46 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>SelectHazardousSubstancePage</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>Gefahrstoffsuche</ion-title>
   </ion-navbar>
+
+  <ion-toolbar color="dark" no-border-top>
+    <ion-searchbar padding-right placeholder="Name des Gefahrstoffes" (ionInput)="search($event)"></ion-searchbar>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="outer-content">
+  <ion-list>
+    <ion-item-sliding *ngFor="let hazardousSubstance of hazardousSubstances | async">
+      <ion-item>
+        <h2>{{hazardousSubstance.name}}</h2>
+        <p>{{hazardousSubstance.manufacturer}}</p>
+        <ion-note item-end>
+          {{hazardousSubstance.hsNumber}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="secondary">
+          <ion-icon name="menu"></ion-icon>
+          More
+        </button>
+        <button ion-button color="dark">
+          <ion-icon name="volume-off"></ion-icon>
+          Mute
+        </button>
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="danger">
+      <ion-icon name="qr-scanner"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

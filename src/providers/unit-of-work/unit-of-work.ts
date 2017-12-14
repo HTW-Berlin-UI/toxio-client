@@ -13,8 +13,10 @@ export class UnitOfWork {
     constructor(
         private network: NetworkProvider,
         private dataExchange: DataExchangeProvider,
-        private hazardousSubstanceRepository: HazardousSubstanceRepository
-    ) {}
+        public hazardousSubstanceRepository: HazardousSubstanceRepository
+    ) {
+        console.log('UnitOfWork initiated');
+    }
 
     public init(): void {
         if (this.network.isOnline) {

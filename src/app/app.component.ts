@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UnitOfWork } from '../providers/providers';
 
-import { WELCOME_PAGE, SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages/pages.constants';
+import { WELCOME_PAGE } from '../pages/pages.constants';
 
 @Component({
     templateUrl: 'app.html'

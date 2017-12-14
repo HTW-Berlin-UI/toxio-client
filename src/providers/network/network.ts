@@ -15,6 +15,8 @@ export class NetworkProvider {
     }
 
     constructor(private network: Network, private toastCtrl: ToastController) {
+        console.log('NetworkProvider initiated');
+
         this.network.onConnect().subscribe(() => {
             setTimeout(() => {
                 this.toastCtrl
