@@ -19,14 +19,11 @@
 
 <ion-content class="outer-content">
   <ion-list>
-    <ion-item-sliding *ngFor="let hazardousSubstance of hazardousSubstances | async">
-      <ion-item>
+    <ion-item-sliding *ngFor="let hazardousSubstance of hazardousSubstances | async | hazardousSubstanceFilter:textFilter">
+      <button ion-item (click)="select(hazardousSubstance)">
         <h2>{{hazardousSubstance.name}}</h2>
         <p>{{hazardousSubstance.manufacturer}}</p>
-        <ion-note item-end>
-          {{hazardousSubstance.hsNumber}}
-        </ion-note>
-      </ion-item>
+      </button>
       <ion-item-options>
         <button ion-button color="secondary">
           <ion-icon name="menu"></ion-icon>

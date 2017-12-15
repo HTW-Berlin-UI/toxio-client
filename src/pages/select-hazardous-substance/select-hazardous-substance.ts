@@ -18,6 +18,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SelectHazardousSubstancePage {
     public hazardousSubstances: Observable<HazardousSubstance[]>;
+    public textFilter: string;
 
     // public get hazardousSubstances(): Observable<HazardousSubstance[]> {
     //     return this.hazardousSubstancesRepository.all();
@@ -34,7 +35,11 @@ export class SelectHazardousSubstancePage {
         this.hazardousSubstances = this.hazardousSubstancesRepository.all();
     }
 
-    search(ev: any) {
-        console.log(ev);
+    search(event: Event): void {
+        this.textFilter = (<HTMLInputElement>event.target).value;
+    }
+
+    select(hazardousSubstance: HazardousSubstance): void {
+        console.log(hazardousSubstance);
     }
 }
