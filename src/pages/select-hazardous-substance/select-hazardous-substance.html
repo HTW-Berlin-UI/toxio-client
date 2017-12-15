@@ -11,7 +11,7 @@
   </ion-navbar>
 
   <ion-toolbar color="dark" no-border-top>
-    <ion-searchbar placeholder="Name des Gefahrstoffes" (ionInput)="search($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Name, CAS- oder EG-Nummer" (ionInput)="search($event)"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>
@@ -26,23 +26,19 @@
       </button>
       <ion-item-options>
         <button ion-button color="secondary">
-          <ion-icon name="menu"></ion-icon>
-          More
+          <ion-icon name="attach"></ion-icon>
+          Datenblatt
         </button>
-        <button ion-button color="dark">
-          <ion-icon name="volume-off"></ion-icon>
-          Mute
-        </button>
-        <button ion-button color="danger">
-          <ion-icon name="trash"></ion-icon>
-          Delete
+        <button ion-button>
+          <ion-icon name="options"></ion-icon>
+          Anwendung
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
   <ion-fab right bottom>
     <button ion-fab color="danger">
-      <ion-icon name="qr-scanner"></ion-icon>
+      <i class="fa fa-qrcode fa-2x"></i>
     </button>
   </ion-fab>
 </ion-content>
