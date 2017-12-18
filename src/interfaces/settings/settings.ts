@@ -1,15 +1,15 @@
 export interface Settings {
     debugMode?: boolean;
     current?: {
-        user?: {
-            can?: {
+        user: {
+            can: {
                 addUsage: boolean;
             };
         };
-        organization?: {
+        organization: {
             id: number;
         };
-        unit?: {
+        unit: {
             id: number;
         };
     };

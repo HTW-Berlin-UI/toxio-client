@@ -7,13 +7,21 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>Gefahrstoff Details</ion-title>
+    <ion-title>{{hazardousSubstance.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 
-<ion-content padding>
-
+<ion-content class="cards-bg">
+  <ion-card>
+    <ion-card-content>
+      <h2>{{hazardousSubstance.name}}</h2>
+      <p>{{hazardousSubstance.hsNumber}}</p>
+      <p>{{hazardousSubstance.manufacturer}}</p>
+      <ngx-qrcode [qrc-value]="qrCodeValue" qrc-version="5" qrc-element-type="img" qrc-class="qrcode" qrc-errorCorrectionLevel="H">
+      </ngx-qrcode>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

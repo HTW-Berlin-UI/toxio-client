@@ -10,6 +10,12 @@ export const APP_DI_CONFIG: Settings = {
             can: {
                 addUsage: true
             }
+        },
+        organization: {
+            id: 1
+        },
+        unit: {
+            id: 2
         }
     }
 };

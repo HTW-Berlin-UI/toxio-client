@@ -5,7 +5,7 @@ import { HazardousSubstance } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 import { Settings } from '../../interfaces/interfaces';
-import { HazardousSubstanceRepository } from '../../providers/providers';
+import { HazardousSubstanceRepository, QrCodeProvider } from '../../providers/providers';
 import { tap } from 'rxjs/operators';
 
 /**
@@ -21,26 +21,38 @@ import { tap } from 'rxjs/operators';
     templateUrl: 'single-hazardous-substance.html'
 })
 export class SingleHazardousSubstancePage {
-    private hazardousSubstance: HazardousSubstance;
+    public hazardousSubstance: HazardousSubstance;
+    public qrCodeValue: string;
 
     constructor(
         @Inject(APP_CONFIG) private appConfig: Settings,
         private alertCtrl: AlertController,
         public navCtrl: NavController,
         public navParams: NavParams,
-        private hazardousSubstanceRepository: HazardousSubstanceRepository
+        private hazardousSubstanceRepository: HazardousSubstanceRepository,
+        private qrCodeProvider: QrCodeProvider
     ) {}
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SingleHazardousSubstancePage');
+        console.log(
+            `ionViewDidLoad SingleHazardousSubstancePage for ${this.hazardousSubstance.name}`
+        );
+        this.qrCodeValue = this.qrCodeProvider.getValueFor(this.hazardousSubstance);
+        console.log(this.qrCodeValue);
     }
 
-    ionViewCanEnter(): boolean {
+    ionViewCanEnter(): boolean | Promise<HazardousSubstance[]> {
         const hazardousSubstance = this.navParams.get('hazardousSubstance');
         if (!hazardousSubstance) {
             if (this.appConfig.debugMode) {
-                this.hazardousSubstanceRepository.all().pipe(tap(console.log));
-                return true;
+                return this.hazardousSubstanceRepository
+                    .all()
+                    .pipe(
+                        tap(hazardousSubstances => {
+                            this.hazardousSubstance = hazardousSubstances.shift();
+                        })
+                    )
+                    .toPromise();
             }
 
             this.alertCtrl

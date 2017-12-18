@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { HazardousSubstanceRepository } from '../../providers/providers';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';

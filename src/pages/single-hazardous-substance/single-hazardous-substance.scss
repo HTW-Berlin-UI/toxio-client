@@ -1,3 +1,11 @@
 page-single-hazardous-substance {
-
+    ion-content.cards-bg {
+        background: color($colors, light, base);
+    }
+    div.qrcode {
+        img {
+            width: auto;
+            margin: 0 auto;
+        }
+    }
 }

@@ -22,7 +22,7 @@ export class Toxio {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.overlaysWebView(false);
-            statusBar.backgroundColorByHexString('#333745');
+            statusBar.backgroundColorByHexString('#0d111e');
             splashScreen.hide();
             unitOfWork.init();
         });
