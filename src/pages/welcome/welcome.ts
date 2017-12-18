@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { APP_CONFIG, AppConfig } from '../../app/app.config';
 import { UnitOfWork } from '../../providers/providers';
+import { APP_CONFIG } from '../../app/app.config';
+import { Settings } from '../../interfaces/interfaces';
 
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 
@@ -19,17 +20,17 @@ import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 })
 export class WelcomePage {
     constructor(
+        @Inject(APP_CONFIG) private appConfig: Settings,
         public navCtrl: NavController,
-        @Inject(APP_CONFIG) private appConfig: AppConfig,
         private unitOfWork: UnitOfWork
     ) {}
 
     ionViewDidLoad() {
-        this.unitOfWork.init();
+        if (this.appConfig.debugMode) this.unitOfWork.init();
     }
 
     start(startAsManager: boolean = false): void {
-        this.appConfig.currentUser.can.addUsage = startAsManager;
+        this.appConfig.current.user.can.addUsage = startAsManager;
         this.navCtrl.push(SELECT_HAZARDOUS_SUBSTANCE_PAGE);
     }
 }

@@ -1,11 +1,15 @@
 import { NgModule, InjectionToken } from '@angular/core';
+import { Settings } from '../interfaces/interfaces';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-export const APP_DI_CONFIG: AppConfig = {
-    currentUser: {
-        can: {
-            addUsage: true
+export const APP_DI_CONFIG: Settings = {
+    debugMode: true,
+    current: {
+        user: {
+            can: {
+                addUsage: true
+            }
         }
     }
 };
@@ -18,10 +22,4 @@ export const APP_DI_CONFIG: AppConfig = {
         }
     ]
 })
-export class AppConfig {
-    currentUser: {
-        can: {
-            addUsage: boolean;
-        };
-    };
-}
+export class AppConfig implements Settings {}

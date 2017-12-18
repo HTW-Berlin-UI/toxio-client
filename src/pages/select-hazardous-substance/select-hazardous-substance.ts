@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HazardousSubstanceRepository } from '../../providers/providers';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';
+import { SINGLE_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 
 /**
  * Generated class for the SelectHazardousSubstancePage page.
@@ -26,7 +27,6 @@ export class SelectHazardousSubstancePage {
 
     constructor(
         public navCtrl: NavController,
-        public navParams: NavParams,
         private hazardousSubstancesRepository: HazardousSubstanceRepository
     ) {}
 
@@ -40,6 +40,8 @@ export class SelectHazardousSubstancePage {
     }
 
     select(hazardousSubstance: HazardousSubstance): void {
-        console.log(hazardousSubstance);
+        this.navCtrl.push(SINGLE_HAZARDOUS_SUBSTANCE_PAGE, {
+            hazardousSubstance: hazardousSubstance
+        });
     }
 }
