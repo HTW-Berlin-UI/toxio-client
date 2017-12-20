@@ -36,8 +36,8 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-fab right bottom>
-    <button ion-fab color="danger">
+  <ion-fab *ngIf="qrScannerStatus?.authorized" right bottom>
+    <button (click)="scan()" ion-fab color="danger">
       <i class="fa fa-qrcode fa-2x"></i>
     </button>
   </ion-fab>

@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG } from '../../app/app.config';
 import { Settings, HazardousSubstance } from '../../interfaces/interfaces';
+import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository/hazardous-substance-repository';
 
 /*
   Generated class for the QrCodeProvider provider.
@@ -9,8 +10,19 @@ import { Settings, HazardousSubstance } from '../../interfaces/interfaces';
   and Angular DI.
 */
 @Injectable()
-export class QrCodeProvider {
-    constructor(@Inject(APP_CONFIG) private appConfig: Settings) {}
+export class QRCodeProvider {
+    private hazardousSubstances: HazardousSubstance[];
+    private separator: string = '-';
+    private hsNumberIndex: number = 2;
+
+    constructor(
+        @Inject(APP_CONFIG) private appConfig: Settings,
+        private hazardousSubstanceRepository: HazardousSubstanceRepository
+    ) {
+        this.hazardousSubstanceRepository.all().subscribe(hazardousSubstances => {
+            this.hazardousSubstances = hazardousSubstances;
+        });
+    }
 
     public getValueFor(hazardousSubstance: HazardousSubstance): string {
         const parts = [
@@ -19,7 +31,22 @@ export class QrCodeProvider {
             hazardousSubstance.hsNumber,
             hazardousSubstance.id
         ];
+        const sep = this.separator;
 
-        return `${parts[0]}-${parts[1]}-${parts[2]}-${parts[3]}`;
+        return `${parts[0]}${sep}${parts[1]}${sep}${parts[2]}${sep}${parts[3]}`;
+    }
+
+    getHazardousSubstanceFor(qrToken: string): false | HazardousSubstance {
+        if (!this.hazardousSubstances) return false;
+
+        const attributes = qrToken.split(this.separator);
+
+        if (!(this.hsNumberIndex in attributes)) return false;
+
+        const searchForHsNumber = attributes[this.hsNumberIndex];
+
+        return this.hazardousSubstances.find(
+            hazardousSubstance => hazardousSubstance.hsNumber === searchForHsNumber
+        );
     }
 }

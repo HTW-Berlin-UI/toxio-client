@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
-import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
 import { Settings } from '../../interfaces/interfaces';
-import { HazardousSubstanceRepository, QrCodeProvider } from '../../providers/providers';
+import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
+import { HazardousSubstanceRepository, QRCodeProvider } from '../../providers/providers';
 import { tap } from 'rxjs/operators';
 
 /**
@@ -26,11 +26,11 @@ export class SingleHazardousSubstancePage {
 
     constructor(
         @Inject(APP_CONFIG) private appConfig: Settings,
-        private alertCtrl: AlertController,
+        private alertController: AlertController,
         public navCtrl: NavController,
         public navParams: NavParams,
         private hazardousSubstanceRepository: HazardousSubstanceRepository,
-        private qrCodeProvider: QrCodeProvider
+        private qrCodeProvider: QRCodeProvider
     ) {}
 
     ionViewDidLoad() {
@@ -55,7 +55,7 @@ export class SingleHazardousSubstancePage {
                     .toPromise();
             }
 
-            this.alertCtrl
+            this.alertController
                 .create({
                     title: 'Oops...',
                     subTitle: 'Bitte wählen Sie zuerst einen Gefahrstoff aus!',

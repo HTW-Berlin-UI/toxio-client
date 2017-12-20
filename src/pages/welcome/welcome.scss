@@ -11,7 +11,7 @@ page-welcome {
         height: 38%;
         z-index: 1;
         background-repeat: repeat-x;
-        animation: animatedBackground 70s linear infinite;
+        animation: animatedBackground 50s linear infinite;
     }
 
     @keyframes animatedBackground {

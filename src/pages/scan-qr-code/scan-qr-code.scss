@@ -1,0 +1,14 @@
+page-scan-qr-code {
+    ion-content.transparent {
+        background: none !important;
+    }
+    .qr-scan-area {
+        ion-grid,
+        ion-row {
+            height: 100%;
+        }
+        ion-icon {
+            font-size: 20em;
+        }
+    }
+}
