@@ -16,12 +16,39 @@
 
 <ion-content class="cards-bg">
   <ion-card>
+    <ion-card-header>
+      {{hazardousSubstance.name}}
+    </ion-card-header>
     <ion-card-content>
-      <h2>{{hazardousSubstance.name}}</h2>
-      <p>{{hazardousSubstance.hsNumber}}</p>
-      <p>{{hazardousSubstance.manufacturer}}</p>
-      <ngx-qrcode [qrc-value]="qrCodeValue" qrc-version="5" qrc-element-type="img" qrc-class="qrcode" qrc-errorCorrectionLevel="H">
-      </ngx-qrcode>
+      <ion-item>
+        <ion-label stacked color="primary">HS-Nummer</ion-label>
+        <ion-label no-margin>{{hazardousSubstance.hsNumber}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked color="primary">CAS-Nummer</ion-label>
+        <ion-label no-margin>{{hazardousSubstance.substanceCAS}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked color="primary">EG-Nummer</ion-label>
+        <ion-label no-margin>{{hazardousSubstance.substanceEG}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked color="primary">Hersteller</ion-label>
+        <ion-label no-margin>{{hazardousSubstance.manufacturer}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-thumbnail margin-vertical>
+          <ngx-qrcode [qrc-value]="qrCodeValue" qrc-version="5" qrc-element-type="img" qrc-class="qrcode" qrc-errorCorrectionLevel="H">
+          </ngx-qrcode>
+        </ion-thumbnail>
+        <button color="secondary" margin-vertical ion-button block>QR Code Exportieren</button>
+        <button margin-vertical ion-button block>Sicherheitsdatenblatt</button>
+        <button margin-top ion-button block>Neue Anwendung</button>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

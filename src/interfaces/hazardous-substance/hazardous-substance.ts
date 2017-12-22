@@ -10,4 +10,6 @@ export interface HazardousSubstance extends Syncable {
     symbols: string[];
     hPhrases: string[];
     pPhrases: string[];
+    substanceCAS: string;
+    substanceEG: string;
 }

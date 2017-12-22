@@ -72,3 +72,10 @@ $colors: (
 // Font Awesome
 $fa-font-path: $font-path;
 @import 'font-awesome';
+
+//Overriding Ionic Sass Variables
+// --------------------------------------------------
+$toxio-thumbail-size: 150px;
+$item-ios-thumbnail-size: $toxio-thumbail-size;
+$item-md-thumbnail-size: $toxio-thumbail-size;
+$item-wp-thumbnail-size: $toxio-thumbail-size;
