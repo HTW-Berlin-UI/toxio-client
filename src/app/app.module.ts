@@ -7,6 +7,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Network } from '@ionic-native/network';
 import { QRScanner } from '@ionic-native/qr-scanner';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { File } from '@ionic-native/file';
 import { AppConfig } from './app.config';
 import { Toxio } from './app.component';
 import { ToxioErrorHandler } from '../models/models';
@@ -42,6 +45,9 @@ import {
         HazardousSubstanceRepository,
         QRCodeProvider,
         QRScanner,
+        DocumentViewer,
+        SocialSharing,
+        File,
         { provide: ErrorHandler, useClass: ToxioErrorHandler }
     ]
 })
