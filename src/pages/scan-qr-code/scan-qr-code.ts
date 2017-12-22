@@ -47,7 +47,7 @@ export class ScanQrCodePage {
         if (this.platform.is('cordova'))
             this.qrScanner.getStatus().then(status => {
                 if (status.authorized) {
-                    console.log('los gehts');
+                    console.log('QR Scanner: scan process started');
                     const scanSub = this.qrScanner.scan().subscribe((value: string) => {
                         const result = this.qrCodeProvider.getHazardousSubstanceFor(value);
                         this.qrScanner.hide();
