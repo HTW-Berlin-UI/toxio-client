@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { HazardousSubstance } from '../../interfaces/interfaces';
@@ -9,6 +9,8 @@ import { HazardousSubstanceRepository, QRCodeProvider } from '../../providers/pr
 import { tap } from 'rxjs/operators';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { NgxQRCodeComponent } from 'ngx-qrcode2';
 
 /**
  * Generated class for the SingleHazardousSubstancePage page.
@@ -23,6 +25,7 @@ import { File } from '@ionic-native/file';
     templateUrl: 'single-hazardous-substance.html'
 })
 export class SingleHazardousSubstancePage {
+    @ViewChild(NgxQRCodeComponent) qrcode: NgxQRCodeComponent;
     public hazardousSubstance: HazardousSubstance;
     public qrCodeValue: string;
 
@@ -34,10 +37,11 @@ export class SingleHazardousSubstancePage {
         private hazardousSubstanceRepository: HazardousSubstanceRepository,
         private qrCodeProvider: QRCodeProvider,
         private documentViewer: DocumentViewer,
-        private fileSystem: File
+        private fileSystem: File,
+        private sharer: SocialSharing
     ) {}
 
-    public openSafetyDataSheet() {
+    public openSafetyDataSheet(): void {
         const path = `${this.fileSystem.applicationDirectory}www/assets/sds/`;
         const file = 'ACT143_2015-11-27.pdf';
         console.log('try open file', path + file);
@@ -57,6 +61,36 @@ export class SingleHazardousSubstancePage {
             title: ` ${this.hazardousSubstance.name}`
         });
     }
+
+    public exportQRCode(): void {
+        this.qrcode
+            .toDataURL()
+            .then((qrDataUrl: string) => {
+                console.log(qrDataUrl);
+                this.sharer
+                    .share(
+                        `QR Code für ${this.hazardousSubstance.name}`,
+                        `${this.hazardousSubstance.hsNumber}_qrcode`,
+                        qrDataUrl
+                    )
+                    .then(v => {
+                        console.log('Share', v);
+                    })
+                    .catch(this.informQRCodeExportError);
+            })
+            .catch(this.informQRCodeExportError);
+    }
+
+    private informQRCodeExportError = (e: Error): void => {
+        this.alertController
+            .create({
+                title: 'Oops...',
+                subTitle: 'QR Code Export klappt nicht',
+                message: e.message,
+                buttons: ['meh']
+            })
+            .present();
+    };
 
     ionViewDidLoad() {
         console.log(
