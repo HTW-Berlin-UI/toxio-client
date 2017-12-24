@@ -1,4 +1,16 @@
 page-single-hazardous-substance {
+    @mixin hs-attributes-border($color:$list-md-border-color, $width: 1px) {
+        border-bottom: $width solid $color;
+        border-top: $width solid $color;
+    }
+
+    .card-md ion-grid.hs-attributes {
+        @include hs-attributes-border();
+    }
+    .card-ios ion-grid.hs-attributes {
+        @include hs-attributes-border($hairlines-width,$list-ios-border-color);
+    }
+
     ion-content.cards-bg {
         background: color($colors, light, base);
     }
@@ -6,6 +18,17 @@ page-single-hazardous-substance {
         img {
             width: auto;
             margin: 0 auto;
+        }
+    }
+    ion-grid {
+        ion-row {
+            margin: 0px (-$grid-padding-width/2);
+        }
+
+        &.hs-attributes ion-item {
+            ion-label:not([stacked]) {
+                margin-top: 0;
+            }
         }
     }
 }

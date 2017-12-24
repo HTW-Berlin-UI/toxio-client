@@ -17,38 +17,56 @@
 <ion-content class="cards-bg">
   <ion-card>
     <ion-card-header>
-      {{hazardousSubstance.name}}
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label stacked color="primary">HS-Nummer</ion-label>
-        <ion-label no-margin>{{hazardousSubstance.hsNumber}}</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked color="primary">CAS-Nummer</ion-label>
-        <ion-label no-margin>{{hazardousSubstance.substanceCAS}}</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked color="primary">EG-Nummer</ion-label>
-        <ion-label no-margin>{{hazardousSubstance.substanceEG}}</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked color="primary">Hersteller</ion-label>
-        <ion-label no-margin>{{hazardousSubstance.manufacturer}}</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-thumbnail margin-vertical>
+      <ion-item text-center>
+        <ion-thumbnail (click)="openShareSheet()">
           <ngx-qrcode [qrc-value]="qrCodeValue" qrc-version="5" qrc-element-type="img" qrc-class="qrcode" qrc-errorCorrectionLevel="H">
           </ngx-qrcode>
         </ion-thumbnail>
-        <button color="secondary" margin-vertical ion-button block (click)="exportQRCode()">QR Code Exportieren</button>
-        <button margin-vertical ion-button block (click)="openSafetyDataSheet()">Sicherheitsdatenblatt</button>
-        <button margin-top ion-button block>Neue Anwendung</button>
+        <h2>{{hazardousSubstance.name}}</h2>
+        <p>{{hazardousSubstance.manufacturer}}</p>
       </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+
+
+
+      <ion-grid class="hs-attributes" padding-vertical>
+        <ion-row>
+          <ion-item ion-col col-6 col-sm-4>
+            <ion-label stacked color="primary">CAS-Nummer</ion-label>
+            <ion-label>{{hazardousSubstance.substanceCAS}}</ion-label>
+          </ion-item>
+
+          <ion-item ion-col col-6 col-sm-4>
+            <ion-label stacked color="primary">EG-Nummer</ion-label>
+            <ion-label>{{hazardousSubstance.substanceEG}}</ion-label>
+          </ion-item>
+
+          <ion-item ion-col col-12 col-sm-4>
+            <ion-label stacked color="primary">HS-Nummer</ion-label>
+            <ion-label>{{hazardousSubstance.hsNumber}}</ion-label>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid margin-vertical>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-end block outline (click)="openSafetyDataSheet()">
+              Datenblatt
+              <ion-icon name="attach"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-end>
+              Anwendung
+              <ion-icon name="options"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

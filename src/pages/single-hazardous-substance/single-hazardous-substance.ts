@@ -1,5 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
@@ -11,6 +11,7 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { NgxQRCodeComponent } from 'ngx-qrcode2';
+import { ActionSheetController } from 'ionic-angular';
 
 /**
  * Generated class for the SingleHazardousSubstancePage page.
@@ -31,8 +32,10 @@ export class SingleHazardousSubstancePage {
 
     constructor(
         @Inject(APP_CONFIG) private appConfig: Settings,
+        private platform: Platform,
+        private actionSheetController: ActionSheetController,
         private alertController: AlertController,
-        public navCtrl: NavController,
+        public navController: NavController,
         public navParams: NavParams,
         private hazardousSubstanceRepository: HazardousSubstanceRepository,
         private qrCodeProvider: QRCodeProvider,
@@ -62,7 +65,27 @@ export class SingleHazardousSubstancePage {
         });
     }
 
-    public exportQRCode(): void {
+    public openShareSheet(): void {
+        this.actionSheetController
+            .create({
+                title: `Optionen für ${this.hazardousSubstance.name}`,
+                buttons: [
+                    {
+                        text: 'QR Code Exportieren',
+                        icon: !this.platform.is('ios') ? 'share' : null,
+                        handler: () => this.exportQRCode()
+                    },
+                    {
+                        text: 'Abbrechen',
+                        role: 'cancel', // will always sort to be on the bottom
+                        icon: !this.platform.is('ios') ? 'close' : null
+                    }
+                ]
+            })
+            .present();
+    }
+
+    private exportQRCode(): void {
         this.qrcode
             .toDataURL()
             .then((qrDataUrl: string) => {
@@ -122,7 +145,7 @@ export class SingleHazardousSubstancePage {
                         {
                             text: 'Ok',
                             handler: () => {
-                                this.navCtrl.push(SELECT_HAZARDOUS_SUBSTANCE_PAGE);
+                                this.navController.push(SELECT_HAZARDOUS_SUBSTANCE_PAGE);
                             }
                         }
                     ]
