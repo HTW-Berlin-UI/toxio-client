@@ -23,7 +23,12 @@ export class HazardousSubstanceFilterPipe implements PipeTransform {
 
         return hazardousSubstances.filter(hazardousSubstance => {
             return _.some(
-                [hazardousSubstance.name, hazardousSubstance.manufacturer],
+                [
+                    hazardousSubstance.name,
+                    hazardousSubstance.manufacturer,
+                    hazardousSubstance.substanceCAS,
+                    hazardousSubstance.substanceEG
+                ],
                 value => value.toLowerCase().indexOf(filter) !== -1
             );
         });

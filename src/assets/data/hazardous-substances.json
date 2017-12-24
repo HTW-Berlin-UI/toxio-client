@@ -12,8 +12,8 @@
                 "symbols": ["GHS02", "GHS05", "GHS07", "GHS08"],
                 "hPhrases": ["H226", "H330", "H372"],
                 "pPhrases": ["P305+P351+P338", "P202", "P272", "P273"],
-                "substanceCAS": "50-56-6",
-                "substanceEG": "200-048-4",
+                "substanceCAS": "51-56-6",
+                "substanceEG": "201-048-4",
                 "created": "2017-12-08T16:28:33+01:00",
                 "updated": "2017-12-08T16:28:33+01:00"
             },
