@@ -14,6 +14,7 @@ export class QRCodeProvider {
     private hazardousSubstances: HazardousSubstance[];
     private separator: string = '-';
     private hsNumberIndex: number = 2;
+    private prefix: string = 'toxio://open?';
 
     constructor(
         @Inject(APP_CONFIG) private appConfig: Settings,
@@ -33,11 +34,14 @@ export class QRCodeProvider {
         ];
         const sep = this.separator;
 
-        return `${parts[0]}${sep}${parts[1]}${sep}${parts[2]}${sep}${parts[3]}`;
+        return `${this.prefix}${parts[0]}${sep}${parts[1]}${sep}${parts[2]}${sep}${parts[3]}`;
     }
 
     getHazardousSubstanceFor(qrToken: string): false | HazardousSubstance {
         if (!this.hazardousSubstances) return false;
+
+        if (!qrToken.startsWith(this.prefix)) return false;
+        qrToken.replace(this.prefix, '');
 
         const attributes = qrToken.split(this.separator);
 
