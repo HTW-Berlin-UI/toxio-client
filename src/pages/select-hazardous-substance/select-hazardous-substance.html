@@ -25,7 +25,7 @@
         <p>{{hazardousSubstance.manufacturer}}</p>
       </button>
       <ion-item-options>
-        <button ion-button color="secondary">
+        <button ion-button color="secondary" (click)="openSafetyDataSheet(hazardousSubstance)">
           <ion-icon name="attach"></ion-icon>
           Datenblatt
         </button>

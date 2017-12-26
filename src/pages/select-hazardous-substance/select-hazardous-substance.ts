@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-import { HazardousSubstanceRepository } from '../../providers/providers';
+import { HazardousSubstanceRepository, SafetyDataSheetProvider } from '../../providers/providers';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { SINGLE_HAZARDOUS_SUBSTANCE_PAGE, SCAN_QR_CODE_PAGE } from '../pages.constants';
@@ -27,6 +27,7 @@ export class SelectHazardousSubstancePage {
         public navCtrl: NavController,
         private alertController: AlertController,
         private hazardousSubstancesRepository: HazardousSubstanceRepository,
+        private safetyDataSheetProvider: SafetyDataSheetProvider,
         private qrScanner: QRScanner
     ) {}
 
@@ -44,6 +45,10 @@ export class SelectHazardousSubstancePage {
         this.navCtrl.push(SINGLE_HAZARDOUS_SUBSTANCE_PAGE, {
             hazardousSubstance: hazardousSubstance
         });
+    }
+
+    public openSafetyDataSheet(hazardousSubstance: HazardousSubstance): void {
+        this.safetyDataSheetProvider.openSafetyDataSheet(hazardousSubstance);
     }
 
     scan(): void {

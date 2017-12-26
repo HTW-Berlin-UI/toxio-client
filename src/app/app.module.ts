@@ -19,7 +19,8 @@ import {
     QRCodeProvider,
     UnitOfWork,
     DbContext,
-    HazardousSubstanceRepository
+    HazardousSubstanceRepository,
+    SafetyDataSheetProvider
 } from '../providers/providers';
 
 @NgModule({
@@ -38,6 +39,7 @@ import {
         SplashScreen,
         IonicErrorHandler,
         Network,
+        SafetyDataSheetProvider,
         DataExchangeProvider,
         NetworkProvider,
         UnitOfWork,
