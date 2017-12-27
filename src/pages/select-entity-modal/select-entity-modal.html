@@ -1,0 +1,31 @@
+<!--
+  Generated template for the SelectEntityModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>{{label}} auswählen</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar color="dark" no-border-top>
+    <ion-searchbar placeholder="Name" (ionInput)="search($event)"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button *ngFor="let entity of entities | async" ion-item (click)="dismiss(entity)">
+      {{entity.name}}
+    </button>
+  </ion-list>
+</ion-content>

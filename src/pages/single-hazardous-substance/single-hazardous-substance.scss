@@ -11,9 +11,6 @@ page-single-hazardous-substance {
         @include hs-attributes-border($hairlines-width,$list-ios-border-color);
     }
 
-    ion-content.cards-bg {
-        background: color($colors, light, base);
-    }
     div.qrcode {
         img {
             width: auto;

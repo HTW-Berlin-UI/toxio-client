@@ -4,7 +4,11 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { HazardousSubstanceRepository, SafetyDataSheetProvider } from '../../providers/providers';
 import { HazardousSubstance } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';
-import { SINGLE_HAZARDOUS_SUBSTANCE_PAGE, SCAN_QR_CODE_PAGE } from '../pages.constants';
+import {
+    SINGLE_HAZARDOUS_SUBSTANCE_PAGE,
+    SCAN_QR_CODE_PAGE,
+    ADD_USAGE_PAGE
+} from '../pages.constants';
 
 /**
  * Generated class for the SelectHazardousSubstancePage page.
@@ -24,7 +28,7 @@ export class SelectHazardousSubstancePage {
     public qrScannerStatus: QRScannerStatus;
 
     constructor(
-        public navCtrl: NavController,
+        public navController: NavController,
         private alertController: AlertController,
         private hazardousSubstancesRepository: HazardousSubstanceRepository,
         private safetyDataSheetProvider: SafetyDataSheetProvider,
@@ -37,12 +41,12 @@ export class SelectHazardousSubstancePage {
         this.handleQRScanStatus(this.qrScanner.prepare());
     }
 
-    search(event: Event): void {
+    public search(event: Event): void {
         this.textFilter = (<HTMLInputElement>event.target).value;
     }
 
-    select(hazardousSubstance: HazardousSubstance): void {
-        this.navCtrl.push(SINGLE_HAZARDOUS_SUBSTANCE_PAGE, {
+    public select(hazardousSubstance: HazardousSubstance): void {
+        this.navController.push(SINGLE_HAZARDOUS_SUBSTANCE_PAGE, {
             hazardousSubstance: hazardousSubstance
         });
     }
@@ -51,8 +55,14 @@ export class SelectHazardousSubstancePage {
         this.safetyDataSheetProvider.openSafetyDataSheet(hazardousSubstance);
     }
 
-    scan(): void {
-        this.navCtrl.push(SCAN_QR_CODE_PAGE);
+    public addUsage(hazardousSubstance: HazardousSubstance): void {
+        this.navController.push(ADD_USAGE_PAGE, {
+            hazardousSubstance: hazardousSubstance
+        });
+    }
+
+    public scan(): void {
+        this.navController.push(SCAN_QR_CODE_PAGE);
     }
 
     private handleQRScanStatus(initScanner: Promise<QRScannerStatus>): void {

@@ -12,7 +12,9 @@ import * as _ from 'lodash';
 })
 export class HazardousSubstanceFilterPipe implements PipeTransform {
     /**
-     * Takes a value and makes it lowercase.
+     * Filter Hazardous Substances by string
+     * @param hazardousSubstances
+     * @param filter
      */
     transform(hazardousSubstances: HazardousSubstance[], filter: string) {
         if (!filter) {

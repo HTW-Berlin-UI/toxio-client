@@ -17,7 +17,7 @@
 </ion-header>
 
 
-<ion-content class="outer-content">
+<ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let hazardousSubstance of hazardousSubstances | async | hazardousSubstanceFilter:textFilter">
       <button ion-item (click)="select(hazardousSubstance)">
@@ -29,7 +29,7 @@
           <ion-icon name="attach"></ion-icon>
           Datenblatt
         </button>
-        <button ion-button>
+        <button ion-button (click)="addUsage(hazardousSubstance)">
           <ion-icon name="options"></ion-icon>
           Anwendung
         </button>

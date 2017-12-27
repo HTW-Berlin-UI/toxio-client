@@ -1,10 +1,15 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
-import { HazardousSubstance } from '../../interfaces/interfaces';
+import {
+    IonicPage,
+    NavController,
+    NavParams,
+    Platform,
+    AlertController,
+    ActionSheetController
+} from 'ionic-angular';
+import { HazardousSubstance, Settings } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
-import { Settings } from '../../interfaces/interfaces';
-import { SELECT_HAZARDOUS_SUBSTANCE_PAGE } from '../pages.constants';
+import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, ADD_USAGE_PAGE } from '../pages.constants';
 import {
     HazardousSubstanceRepository,
     QRCodeProvider,
@@ -13,7 +18,6 @@ import {
 import { tap } from 'rxjs/operators';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { NgxQRCodeComponent } from 'ngx-qrcode2';
-import { ActionSheetController } from 'ionic-angular';
 
 /**
  * Generated class for the SingleHazardousSubstancePage page.
@@ -44,6 +48,12 @@ export class SingleHazardousSubstancePage {
         private safetyDataSheetProvider: SafetyDataSheetProvider,
         private sharer: SocialSharing
     ) {}
+
+    public addUsage(): void {
+        this.navController.push(ADD_USAGE_PAGE, {
+            hazardousSubstance: this.hazardousSubstance
+        });
+    }
 
     public openSafetyDataSheet(): void {
         this.safetyDataSheetProvider.openSafetyDataSheet(this.hazardousSubstance);

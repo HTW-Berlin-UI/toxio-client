@@ -17,3 +17,6 @@ ion-app,
 .ios .nav-decor {
     background: transparent !important;
 }
+ion-content.cards-bg {
+    background: color($colors, light, base);
+}
