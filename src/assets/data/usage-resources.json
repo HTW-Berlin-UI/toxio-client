@@ -1,0 +1,530 @@
+{
+    "status": "success",
+    "data": {
+        "materials": [
+            {
+                "id": 1,
+                "name": "Metall"
+            },
+            {
+                "id": 2,
+                "name": "Kunststoff"
+            },
+            {
+                "id": 3,
+                "name": "Haut"
+            },
+            {
+                "id": 4,
+                "name": "Kühlschmierstoff"
+            },
+            {
+                "id": 5,
+                "name": "Papier"
+            },
+            {
+                "id": 6,
+                "name": "Glas"
+            },
+            {
+                "id": 7,
+                "name": "innerbetriebliches Gemisch"
+            },
+            {
+                "id": 8,
+                "name": "Milchprodukt"
+            },
+            {
+                "id": 9,
+                "name": "Stein/Beton"
+            },
+            {
+                "id": 10,
+                "name": "Leiterplatten"
+            },
+            {
+                "id": 11,
+                "name": "Aluminium"
+            },
+            {
+                "id": 12,
+                "name": "Edelstahl"
+            },
+            {
+                "id": 13,
+                "name": "Mold"
+            },
+            {
+                "id": 14,
+                "name": "Wasser"
+            },
+            {
+                "id": 15,
+                "name": "kein"
+            },
+            {
+                "id": 16,
+                "name": "Öle"
+            },
+            {
+                "id": 17,
+                "name": "Entfettungsmittel"
+            },
+            {
+                "id": 18,
+                "name": "Reinigungsmittel"
+            },
+            {
+                "id": 19,
+                "name": "Lötmittel"
+            },
+            {
+                "id": 20,
+                "name": "Hallenboden"
+            },
+            {
+                "id": 21,
+                "name": "Pulver"
+            }
+        ],
+        "procs": [
+            {
+                "id": 1,
+                "proc": "PROC1",
+                "description":
+                    "Verwendung in geschlossenem Verfahren, keine Expositionswahrscheinlichkeit"
+            },
+            {
+                "id": 2,
+                "proc": "PROC10",
+                "description": "Auftragen durch Rollen oder Streichen"
+            },
+            {
+                "id": 3,
+                "proc": "PROC11",
+                "description": "Nicht-industrielles Sprühen"
+            },
+            {
+                "id": 4,
+                "proc": "PROC12",
+                "description": "Verwendung von Blähmitteln bei der Herstellung von Schaumstoff"
+            },
+            {
+                "id": 5,
+                "proc": "PROC13",
+                "description": "Behandlung von Erzeugnissen durch Tauchen und Gießen"
+            },
+            {
+                "id": 6,
+                "proc": "PROC14",
+                "description":
+                    "Produktion von Zubereitungen* oder Erzeugnissen durch Tablettieren, Pressen, Extrudieren, Pellettieren"
+            },
+            {
+                "id": 7,
+                "proc": "PROC15",
+                "description": "Verwendung als Laborreagenz"
+            },
+            {
+                "id": 8,
+                "proc": "PROC16",
+                "description":
+                    "Verwendung von Material als Brennstoffquelle, begrenzte Exposition gegenüber unverbranntem Produkt ist zu erwarten"
+            },
+            {
+                "id": 9,
+                "proc": "PROC17",
+                "description":
+                    "Schmierung unter Hochleistungsbedingungen und in teilweise offenem Verfahren"
+            },
+            {
+                "id": 10,
+                "proc": "PROC18",
+                "description": "Schmieren unter Hochleistungsbedingungen"
+            },
+            {
+                "id": 11,
+                "proc": "PROC19",
+                "description": "Handmischen mit engem Kontakt und nur persönlicher Schutzausrüstung"
+            },
+            {
+                "id": 12,
+                "proc": "PROC2",
+                "description":
+                    "Verwendung in geschlossenem,  kontinuierlichem Verfahren mit gelegentlicher kontrollierter Exposition"
+            },
+            {
+                "id": 13,
+                "proc": "PROC20",
+                "description":
+                    "Wärme- und Druckübertragungsflüssigkeiten in dispersiver, gewerblicher Verwendung, jedoch in geschlossenen Systemen"
+            },
+            {
+                "id": 14,
+                "proc": "PROC21",
+                "description":
+                    "Energiearme Handhabung von Stoffen, die in Materialien und/oder Erzeugnissen gebunden sind"
+            },
+            {
+                "id": 15,
+                "proc": "PROC22",
+                "description":
+                    "Potenziell geschlossene Verarbeitung mit Mineralien/Metallen bei erhöhter Temperatur Industrieller Bereich"
+            },
+            {
+                "id": 16,
+                "proc": "PROC23",
+                "description":
+                    "Offene Verarbeitung und Transfer mit Mineralien/Metallen bei erhöhter Temperatur"
+            },
+            {
+                "id": 17,
+                "proc": "PROC24",
+                "description":
+                    "(Mechanische) Hochleistungsbearbeitung von Stoffen, die in Materialien und/oder Erzeugnissen gebunden sind"
+            },
+            {
+                "id": 18,
+                "proc": "PROC25",
+                "description": "Sonstige Warmbearbeitung mit Metallen"
+            },
+            {
+                "id": 19,
+                "proc": "PROC26",
+                "description": "Handhabung von anorganischen Feststoffen bei Umgebungstemperatur"
+            },
+            {
+                "id": 20,
+                "proc": "PROC27a",
+                "description": "Produktion von Metallpulvern (Warmverfahren)"
+            },
+            {
+                "id": 21,
+                "proc": "PROC27b",
+                "description": "Produktion von Metallpulvern (Nassverfahren)"
+            },
+            {
+                "id": 22,
+                "proc": "PROC3",
+                "description":
+                    "Verwendung in geschlossenem Chargenverfahren (Synthese oder Formulierung)"
+            },
+            {
+                "id": 23,
+                "proc": "PROC4",
+                "description":
+                    "Verwendung in Chargen- und anderen Verfahren (Synthese), bei denen die Möglichkeit einer Exposition besteht"
+            },
+            {
+                "id": 24,
+                "proc": "PROC5",
+                "description":
+                    "Mischen oder Vermengen in Chargenverfahren zur Formulierung von Zubereitungen* und Erzeugnissen (mehrfacher und/oder erheblicher Kontakt)"
+            },
+            {
+                "id": 25,
+                "proc": "PROC6",
+                "description": "Kalandriervorgänge"
+            },
+            {
+                "id": 26,
+                "proc": "PROC7",
+                "description": "Industrielles Sprühen"
+            },
+            {
+                "id": "2",
+                "proc": "PROC8a",
+                "description":
+                    "Transfer des Stoffes oder der Zubereitung (Beschickung/Entleerung) aus/in Gefäße/große Behälter in nicht speziell für nur ein Produkt vorgesehenen Anlagen"
+            },
+            {
+                "id": 28,
+                "proc": "PROC8b",
+                "description":
+                    "Transfer des Stoffes oder der Zubereitung (Beschickung/Entleerung) aus/in Gefäße/große Behälter in speziell für nur ein Produkt vorgesehenen Anlagen"
+            },
+            {
+                "id": 29,
+                "proc": "PROC9",
+                "description":
+                    "Transfer des Stoffes oder der Zubereitung in kleine Behälter (spezielle Abfüllanlage, einschließlich Wägung)"
+            }
+        ],
+        "scopes": [
+            {
+                "area": "Oberflächenbehandlung",
+                "id": 73
+            },
+            {
+                "area": "AL-Pigmentieren",
+                "id": 139
+            }
+        ],
+        "procedures": [
+            {
+                "id": 1,
+                "name": "Sprühen"
+            },
+            {
+                "id": 2,
+                "name": "Tauchen"
+            },
+            {
+                "id": 3,
+                "name": "Streichen"
+            },
+            {
+                "id": 4,
+                "name": "Pinseln"
+            },
+            {
+                "id": 5,
+                "name": "Zugabe"
+            },
+            {
+                "id": 6,
+                "name": "Notfallsituation"
+            },
+            {
+                "id": 7,
+                "name": "Anmischen"
+            },
+            {
+                "id": 8,
+                "name": "Transfermolding"
+            },
+            {
+                "id": 9,
+                "name": "Einfüllen von Pellets"
+            },
+            {
+                "id": 10,
+                "name": "Chipbonding"
+            },
+            {
+                "id": 11,
+                "name": "Rakeln"
+            },
+            {
+                "id": 12,
+                "name": "Kleberauftrag auf Schablone (manuell)"
+            },
+            {
+                "id": 13,
+                "name": "Reinigung mit Spachtel"
+            },
+            {
+                "id": 14,
+                "name": "Instandhaltung & Wartung"
+            },
+            {
+                "id": 15,
+                "name": "Produktionsverfügbarkeit herstellen"
+            },
+            {
+                "id": 16,
+                "name":
+                    "PROC08b Transfer des Stoffes oder der Zubereitung (Beschickung/Entleerung) aus/in Gefäße/große Behälter in speziell für nur ein Produkt vorgesehenen Anlagen"
+            },
+            {
+                "id": 17,
+                "name": "PROC19 Handmischen mit engem Kontakt und nur persönlicher Schutzausrüstung"
+            },
+            {
+                "id": 18,
+                "name": "PROC11 Nicht-industrielles Sprühen"
+            },
+            {
+                "id": 19,
+                "name": "PROC07 Industrielles Sprühen"
+            },
+            {
+                "id": 20,
+                "name":
+                    "PROC01 Verwendung in geschlossenem Verfahren, keine Expositionswahrscheinlichkeit"
+            },
+            {
+                "id": 21,
+                "name": "PROC19 Handmischen mit engem Kontakt und nur persönlicher Schutzausrüstung"
+            },
+            {
+                "id": 22,
+                "name": "PROC13 Behandlung von Erzeugnissen durch Tauchen und Gießen"
+            },
+            {
+                "id": 23,
+                "name": "PROC10 Auftragen durch Rollen oder Streichen"
+            },
+            {
+                "id": 24,
+                "name":
+                    "PROC08b Transfer des Stoffes oder der Zubereitung (Beschickung/Entleerung) aus/in Gefäße/große Behälter in speziell für nur ein Produkt vorgesehenen Anlagen"
+            },
+            {
+                "id": 25,
+                "name": "Schleifen"
+            },
+            {
+                "id": 26,
+                "name": "PROC18 Schmieren unter Hochleistungsbedingungen"
+            },
+            {
+                "id": 27,
+                "name": "PROC15 Verwendung als Laborreagenz"
+            },
+            {
+                "id": 28,
+                "name": "Hautschutz"
+            },
+            {
+                "id": 29,
+                "name": "Reinigung"
+            },
+            {
+                "id": 30,
+                "name": "Wischen"
+            }
+        ],
+        "plants": [
+            {
+                "abbr": "AM",
+                "name": "Anlage Münster",
+                "id": 197
+            },
+            {
+                "abbr": "AL-Pig I",
+                "name": "Lackierroboter AL-Pig I",
+                "id": 198
+            },
+            {
+                "abbr": "AL-Pig",
+                "name": "Lackierroboter AL-Pig",
+                "id": 271
+            }
+        ],
+        "purposes": [
+            {
+                "id": 1,
+                "name": "Reinigen"
+            },
+            {
+                "id": 2,
+                "name": "Desinfektion"
+            },
+            {
+                "id": 3,
+                "name": "Kleben"
+            },
+            {
+                "id": 4,
+                "name": "Beschichten"
+            },
+            {
+                "id": 5,
+                "name": "Farbgebung"
+            },
+            {
+                "id": 6,
+                "name": "Beizen"
+            },
+            {
+                "id": 7,
+                "name": "Kleben"
+            },
+            {
+                "id": 8,
+                "name": "Kalibrierung"
+            },
+            {
+                "id": 9,
+                "name": "Aromatisierung"
+            },
+            {
+                "id": 10,
+                "name": "Dichtstoff"
+            },
+            {
+                "id": 11,
+                "name": "Hilfsstoff"
+            },
+            {
+                "id": 12,
+                "name": "Brenn- / Treibstoff"
+            },
+            {
+                "id": 13,
+                "name": "Umhüllen von elektronischen Bauelementen"
+            },
+            {
+                "id": 14,
+                "name": "Chipkleben"
+            },
+            {
+                "id": 15,
+                "name": "Verlöten - manuell"
+            },
+            {
+                "id": 16,
+                "name": "PC17 Hydraulikflüssigkeiten"
+            },
+            {
+                "id": 17,
+                "name": "PC1 - Klebstoffe, Dichtstoffe"
+            },
+            {
+                "id": 18,
+                "name": "PC1 Klebstoffe, Dichtstoffe"
+            },
+            {
+                "id": 19,
+                "name": "PC11 Sprengstoffe"
+            },
+            {
+                "id": 20,
+                "name": "PC12 Düngemittel"
+            },
+            {
+                "id": 21,
+                "name": "PC13 Kraftstoffe"
+            },
+            {
+                "id": 22,
+                "name":
+                    "PC14 Produkte zur Behandlung von Metalloberflächen, einschließlich Galvanik- und Galvanisierprodukte"
+            },
+            {
+                "id": 23,
+                "name": "PC15 Produkte zur Behandlung von Nichtmetalloberflächen"
+            },
+            {
+                "id": 24,
+                "name": "PC16 Wärmeübertragungsflüssigkeiten"
+            },
+            {
+                "id": 25,
+                "name": "PC17 Hydraulikflüssigkeiten"
+            },
+            {
+                "id": 26,
+                "name": "PC18 Tinten und Toner"
+            },
+            {
+                "id": 27,
+                "name": "PC19 Zwischenprodukte"
+            },
+            {
+                "id": 28,
+                "name": "PC2 Adsorptionsmittel"
+            },
+            {
+                "id": 29,
+                "name":
+                    "PC20 Produkte wie ph-Regulatoren, Flockungsmittel, Fällungsmittel, Neutralisationsmittel"
+            },
+            {
+                "id": 30,
+                "name": "PC21 Laborchemikalien"
+            }
+        ]
+    }
+}

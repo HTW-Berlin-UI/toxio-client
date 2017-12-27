@@ -20,6 +20,12 @@ import {
     UnitOfWork,
     DbContext,
     HazardousSubstanceRepository,
+    MaterialRepository,
+    ProcRepository,
+    ProcedureRepository,
+    ScopeRepository,
+    PlantRepository,
+    PurposeRepository,
     SafetyDataSheetProvider
 } from '../providers/providers';
 
@@ -45,6 +51,12 @@ import {
         UnitOfWork,
         DbContext,
         HazardousSubstanceRepository,
+        MaterialRepository,
+        ProcRepository,
+        ProcedureRepository,
+        ScopeRepository,
+        PlantRepository,
+        PurposeRepository,
         QRCodeProvider,
         QRScanner,
         DocumentViewer,

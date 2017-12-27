@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HazardousSubstance, Response } from '../../interfaces/interfaces';
+import { HazardousSubstance, Response, UsageResources } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class DataExchangeProvider {
         console.log('DataExchangeProvider initiated');
     }
 
-    getHazardousSubstances(): Observable<HazardousSubstance[]> {
+    public getHazardousSubstances(): Observable<HazardousSubstance[]> {
         return this.http
             .get<Response<HazardousSubstance[]>>('./assets/data/hazardous-substances.json')
             .pipe(
@@ -25,6 +25,12 @@ export class DataExchangeProvider {
                 map(response => response.data.hazardousSubstances),
                 catchError(this.handleError)
             );
+    }
+
+    public getUsageResources(): Observable<UsageResources> {
+        return this.http
+            .get<Response<UsageResources>>('./assets/data/usage-resources.json')
+            .pipe(tap(console.log), map(response => response.data), catchError(this.handleError));
     }
 
     private handleError(err: HttpErrorResponse): ErrorObservable {

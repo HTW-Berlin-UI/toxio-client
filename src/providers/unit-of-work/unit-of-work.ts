@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { NetworkProvider, DataExchangeProvider } from '../providers';
 import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository/hazardous-substance-repository';
+import { MaterialRepository } from '../repositories/material-repository/material-repository';
+import { ProcRepository } from '../repositories/proc-repository/proc-repository';
+import { ProcedureRepository } from '../repositories/procedure-repository/procedure-repository';
+import { ScopeRepository } from '../repositories/scope-repository/scope-repository';
+import { PlantRepository } from '../repositories/plant-repository/plant-repository';
+import { PurposeRepository } from '../repositories/Purpose-repository/Purpose-repository';
 
 /*
   Generated class for the UnitOfWorkProvider provider.
@@ -13,7 +19,13 @@ export class UnitOfWork {
     constructor(
         private network: NetworkProvider,
         private dataExchange: DataExchangeProvider,
-        public hazardousSubstanceRepository: HazardousSubstanceRepository
+        public hazardousSubstanceRepository: HazardousSubstanceRepository,
+        public materialRepository: MaterialRepository,
+        public procRepository: ProcRepository,
+        public procedureRepository: ProcedureRepository,
+        public scopeRepository: ScopeRepository,
+        public plantRepository: PlantRepository,
+        public purposeRepository: PurposeRepository
     ) {
         console.log('UnitOfWork initiated');
     }
@@ -27,6 +39,14 @@ export class UnitOfWork {
     private updateData(): void {
         this.dataExchange.getHazardousSubstances().subscribe(hazardousSubstances => {
             this.hazardousSubstanceRepository.save(...hazardousSubstances);
+        });
+        this.dataExchange.getUsageResources().subscribe(usageResources => {
+            this.materialRepository.save(...usageResources.materials);
+            this.procRepository.save(...usageResources.procs);
+            this.procedureRepository.save(...usageResources.procedures);
+            this.scopeRepository.save(...usageResources.scopes);
+            this.plantRepository.save(...usageResources.plants);
+            this.purposeRepository.save(...usageResources.purposes);
         });
     }
 }
