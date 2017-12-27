@@ -7,7 +7,7 @@ import {
     ModalController
 } from 'ionic-angular';
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, SELECT_ENTITY_MODAL_PAGE } from '../pages.constants';
-import { HazardousSubstance, Settings, Plant } from '../../interfaces/interfaces';
+import { HazardousSubstance, Settings, Plant, Proc } from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../app/app.config';
 import { UnitOfWork } from '../../providers/providers';
@@ -53,6 +53,10 @@ export class AddUsagePage {
 
     public get plants(): Observable<Plant[]> {
         return this.unitOfWork.plantRepository.all();
+    }
+
+    public get procs(): Observable<Proc[]> {
+        return this.unitOfWork.procRepository.all();
     }
 
     ionViewDidLoad() {

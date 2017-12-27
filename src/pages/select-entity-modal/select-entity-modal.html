@@ -24,8 +24,8 @@
 
 <ion-content>
   <ion-list>
-    <button *ngFor="let entity of entities | async" ion-item (click)="dismiss(entity)">
-      {{entity.name}}
+    <button *ngFor="let entity of entities | async | entityListFilter:textFilter" ion-item text-wrap (click)="dismiss(entity)">
+      {{entity.name || entity.description || entity.area}}
     </button>
   </ion-list>
 </ion-content>

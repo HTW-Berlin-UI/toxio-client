@@ -7,3 +7,4 @@ export interface UsageResources {
     plants: Plant[];
     purposes: Purpose[];
 }
+export type UsageResourceEntity = Material & Proc & Scope & Procedure & Plant & Purpose;

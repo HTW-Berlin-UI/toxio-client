@@ -8,4 +8,4 @@ export { Scope } from './scope/scope';
 export { Procedure } from './procedure/procedure';
 export { Plant } from './plant/plant';
 export { Purpose } from './purpose/purpose';
-export { UsageResources } from './usage-resources/usage-resources';
+export { UsageResources, UsageResourceEntity } from './usage-resources/usage-resources';

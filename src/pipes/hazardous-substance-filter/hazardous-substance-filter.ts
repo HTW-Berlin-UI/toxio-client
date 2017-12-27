@@ -12,10 +12,10 @@ import * as _ from 'lodash';
 })
 export class HazardousSubstanceFilterPipe implements PipeTransform {
     /**
-     * Filter Hazardous Substances by string
-     * @param hazardousSubstances
-     * @param filter
+     * Filter Entities by string
+     *
      */
+
     transform(hazardousSubstances: HazardousSubstance[], filter: string) {
         if (!filter) {
             return hazardousSubstances;
