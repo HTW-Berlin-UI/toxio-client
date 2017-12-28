@@ -10,16 +10,48 @@
     <ion-title>Anwendung | {{hazardousSubstance.name}}</ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content class="cards-bg">
-  <ion-card>
-    <ion-card-header>
-      Anlagen
-    </ion-card-header>
-    <ion-card-content>
-      <button ion-button (click)="openSelectModal('Proc', procs)">kasjdk</button>
-      <p>ausgewählt:{{usage?.plants | json}}</p>
-    </ion-card-content>
-  </ion-card>
+  <form [formGroup]="usage" novalidate (ngSubmit)="save()">
+    <ion-card>
+      <ion-card-header>
+        Anlagen
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid formArrayName="plants" *ngFor="let plantControl of usage.get('plants').controls; let i = index;">
+          <ion-row align-items-end [formGroupName]="i">
+            <h2 text-center ion-col col-12> {{plantControl.get('plant').value.name}} </h2>
+            <ion-item ion-col>
+              <ion-label color="primary" floating>Menge</ion-label>
+              <ion-input type="number" formControlName="amount"></ion-input>
+            </ion-item>
+            <ion-item ion-col>
+              <ion-label color="primary" floating>Einheit</ion-label>
+              <ion-select formControlName="unit" interface="popover">
+                <ion-option *ngFor="let u of units" value="{{u}}">{{u}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <button ion-col col-2 type="button" ion-button icon-only clear color="danger" (click)="removePlant(i)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-row>
+        </ion-grid>
+        <ion-item>
+          <button item-right ion-button small outline type="button" (click)="addPlant()">Anlage hinzufügen</button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Debug
+      </ion-card-header>
+      <ion-card-content>
+        <p>Dirty: {{ usage.dirty }}</p>
+        <p>Touched: {{ usage.touched }}</p>
+        <p>Valid: {{ usage.valid }}</p>
+        <p>Value: {{ usage.value | json }}</p>
+
+        <button ion-button type="submit" [disabled]="!usage.valid">Submit</button>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

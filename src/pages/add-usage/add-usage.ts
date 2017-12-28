@@ -6,6 +6,14 @@ import {
     AlertController,
     ModalController
 } from 'ionic-angular';
+import {
+    FormGroup,
+    FormControl,
+    FormArray,
+    FormBuilder,
+    Validators,
+    AbstractControl
+} from '@angular/forms';
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, SELECT_ENTITY_MODAL_PAGE } from '../pages.constants';
 import { HazardousSubstance, Settings, Plant, Proc } from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
@@ -27,26 +35,51 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AddUsagePage {
     public hazardousSubstance: HazardousSubstance;
-    public usage: {
-        plants: Plant[];
-    };
+    public usage: FormGroup;
+    public units: string[] = ['mg', 'g', 'kg', 't', 'ml', 'l'];
 
     constructor(
         @Inject(APP_CONFIG) private appConfig: Settings,
         public navController: NavController,
         public navParams: NavParams,
+        public fb: FormBuilder,
         private alertController: AlertController,
         private modalController: ModalController,
         private unitOfWork: UnitOfWork
-    ) {}
+    ) {
+        this.usage = this.fb.group({
+            plants: this.fb.array([], Validators.required)
+        });
+    }
 
-    public openSelectModal<T>(label: string, entities: Observable<T[]>) {
+    public addPlant(): void {
+        const selectModal = this.modalController.create(SELECT_ENTITY_MODAL_PAGE, {
+            label: 'Anlage',
+            entities: this.plants
+        });
+        selectModal.onDidDismiss((response?: Plant) => {
+            if (response) {
+                const plants = this.usage.get('plants') as FormArray;
+                const newPlant = this.createPlantControl();
+                newPlant.get('plant').patchValue(response);
+                plants.push(newPlant);
+            }
+        });
+        selectModal.present();
+    }
+
+    public removePlant(index: number): void {
+        const plants = this.usage.get('plants') as FormArray;
+        plants.removeAt(index);
+    }
+
+    public selectUsageEntity<T>(control: AbstractControl, entities: T[], label: string) {
         const selectModal = this.modalController.create(SELECT_ENTITY_MODAL_PAGE, {
             label: label,
             entities: entities
         });
-        selectModal.onDidDismiss((response?: any) => {
-            if (response) this.usage.plants = response;
+        selectModal.onDidDismiss((response?: T) => {
+            if (response) control.patchValue(response);
         });
         selectModal.present();
     }
@@ -59,11 +92,20 @@ export class AddUsagePage {
         return this.unitOfWork.procRepository.all();
     }
 
+    public createPlantControl(): FormGroup {
+        return this.fb.group({
+            plant: [<Plant>null, Validators.required],
+            amount: [null, Validators.required],
+            unit: ['', Validators.required]
+        });
+    }
+
+    public save(): void {
+        console.log('save');
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad AddUsagePage');
-        this.usage = {
-            plants: null
-        };
     }
 
     ionViewCanEnter(): boolean | Promise<HazardousSubstance[]> {
