@@ -15,11 +15,21 @@ import {
     AbstractControl
 } from '@angular/forms';
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, SELECT_ENTITY_MODAL_PAGE } from '../pages.constants';
-import { HazardousSubstance, Settings, Plant, Proc } from '../../interfaces/interfaces';
+import {
+    HazardousSubstance,
+    Settings,
+    Plant,
+    Proc,
+    Procedure,
+    Scope,
+    Material,
+    Purpose
+} from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../app/app.config';
 import { UnitOfWork } from '../../providers/providers';
 import { Observable } from 'rxjs/Observable';
+import { EMKG } from '../../models/models';
 
 /**
  * Generated class for the AddUsagePage page.
@@ -48,8 +58,23 @@ export class AddUsagePage {
         private unitOfWork: UnitOfWork
     ) {
         this.usage = this.fb.group({
-            plants: this.fb.array([], Validators.required)
+            plants: this.fb.array([], Validators.required),
+            procedure: null,
+            scope: [null, Validators.required],
+            purpose: [null, Validators.required],
+            material: [null, Validators.required],
+            proc: [null, Validators.required],
+            emkgSkin: this.fb.group({
+                area: [0, Validators.required],
+                duration: [0, Validators.required]
+            }),
+            emkgInhalation: this.fb.group({
+                quantity: [0, Validators.required],
+                release: [0, Validators.required]
+            })
         });
+
+        console.log(this.emkgInhalation[0].options[1].label);
     }
 
     public addPlant(): void {
@@ -90,6 +115,27 @@ export class AddUsagePage {
 
     public get procs(): Observable<Proc[]> {
         return this.unitOfWork.procRepository.all();
+    }
+
+    public get procedures(): Observable<Procedure[]> {
+        return this.unitOfWork.procedureRepository.all();
+    }
+    public get scopes(): Observable<Scope[]> {
+        return this.unitOfWork.scopeRepository.all();
+    }
+    public get materials(): Observable<Material[]> {
+        return this.unitOfWork.materialRepository.all();
+    }
+    public get purposes(): Observable<Purpose[]> {
+        return this.unitOfWork.purposeRepository.all();
+    }
+
+    public get emkgSkin(): Array<any> {
+        return EMKG.SKIN;
+    }
+
+    public get emkgInhalation(): Array<any> {
+        return EMKG.INHALATION;
     }
 
     public createPlantControl(): FormGroup {

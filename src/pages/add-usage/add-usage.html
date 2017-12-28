@@ -12,21 +12,25 @@
 </ion-header>
 <ion-content class="cards-bg">
   <form [formGroup]="usage" novalidate (ngSubmit)="save()">
+    <!--
+      Anlagen
+    -->
     <ion-card>
       <ion-card-header>
         Anlagen
       </ion-card-header>
       <ion-card-content>
-        <ion-grid formArrayName="plants" *ngFor="let plantControl of usage.get('plants').controls; let i = index;">
+        <ion-grid class="usage-grid" padding-vertical formArrayName="plants" *ngFor="let plantControl of usage.get('plants').controls; let i = index;">
           <ion-row align-items-end [formGroupName]="i">
-            <h2 text-center ion-col col-12> {{plantControl.get('plant').value.name}} </h2>
+            <ion-note col-12 no-padding item-start>Anlage {{i+1}}</ion-note>
+            <h2 ion-col col-12 text-right> {{plantControl.get('plant').value.name}} </h2>
             <ion-item ion-col>
               <ion-label color="primary" floating>Menge</ion-label>
               <ion-input type="number" formControlName="amount"></ion-input>
             </ion-item>
             <ion-item ion-col>
               <ion-label color="primary" floating>Einheit</ion-label>
-              <ion-select formControlName="unit" interface="popover">
+              <ion-select formControlName="unit" interface="action-sheet" cancelText="Abbrechen">
                 <ion-option *ngFor="let u of units" value="{{u}}">{{u}}</ion-option>
               </ion-select>
             </ion-item>
@@ -35,11 +39,198 @@
             </button>
           </ion-row>
         </ion-grid>
-        <ion-item>
-          <button item-right ion-button small outline type="button" (click)="addPlant()">Anlage hinzufügen</button>
+        <ion-item text-center>
+          <button ion-button small outline type="button" (click)="addPlant()">Anlage hinzufügen</button>
         </ion-item>
       </ion-card-content>
     </ion-card>
+
+    <!--
+      GBU/BA
+    -->
+    <ion-card>
+      <ion-card-header>
+        GBU/BA
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-item text-center *ngIf="!usage.get('procedure').value; else procedureContent">
+            <button ion-button small outline type="button" (click)="selectUsageEntity(usage.get('procedure'),procedures,'Verfahren')">Verfahren/Tätigkeit hinzufügen</button>
+          </ion-item>
+          <ng-template #procedureContent>
+            <ion-row>
+              <ion-note col-12 no-padding item-start>Verfahren/Tätigkeit</ion-note>
+              <ion-item ion-col col-10>{{usage.get('procedure').value?.name}} </ion-item>
+              <button ion-col col-2 type="button" ion-button icon-only clear color="primary" (click)="selectUsageEntity(usage.get('procedure'),procedures,'Verfahren')">
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-item text-center *ngIf="!usage.get('scope').value; else scopeContent">
+            <button ion-button small outline type="button" (click)="selectUsageEntity(usage.get('scope'),scopes,'Anwendungsbereich')">Anwendungsbereich hinzufügen</button>
+          </ion-item>
+          <ng-template #scopeContent>
+            <ion-row>
+              <ion-note col-12 no-padding item-start>Anwendungsbereich</ion-note>
+              <ion-item ion-col col-10>{{usage.get('scope').value?.area}} </ion-item>
+              <button ion-col col-2 type="button" ion-button icon-only clear color="primary" (click)="selectUsageEntity(usage.get('scope'),scopes,'Anwendungsbereich')">
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!--
+      Substitutionsprüfung
+    -->
+    <ion-card>
+      <ion-card-header>
+        Substitutionsprüfung
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-item text-center *ngIf="!usage.get('purpose').value; else purposeContent">
+            <button ion-button small outline type="button" (click)="selectUsageEntity(usage.get('purpose'),purposes,'Verwendungszweck')">Produktkategorie hinzufügen</button>
+          </ion-item>
+          <ng-template #purposeContent>
+            <ion-row>
+              <ion-note col-12 no-padding item-start>Produktkategorie</ion-note>
+              <ion-item ion-col col-10>{{usage.get('purpose').value?.name}} </ion-item>
+              <button ion-col col-2 type="button" ion-button icon-only clear color="primary" (click)="selectUsageEntity(usage.get('purpose'),purposes,'Verwendungszweck')">
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-item text-center *ngIf="!usage.get('material').value; else materialContent">
+            <button ion-button small outline type="button" (click)="selectUsageEntity(usage.get('material'),materials,'Material')">Material hinzufügen</button>
+          </ion-item>
+          <ng-template #materialContent>
+            <ion-row>
+              <ion-note col-12 no-padding item-start>Material</ion-note>
+              <ion-item ion-col col-10>{{usage.get('material').value?.name}} </ion-item>
+              <button ion-col col-2 type="button" ion-button icon-only clear color="primary" (click)="selectUsageEntity(usage.get('material'),materials,'Material')">
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-item text-center *ngIf="!usage.get('proc').value; else procContent">
+            <button ion-button small outline type="button" (click)="selectUsageEntity(usage.get('proc'),procs,'PROC Code')">PROC Code hinzufügen</button>
+          </ion-item>
+          <ng-template #procContent>
+            <ion-row>
+              <ion-note col-12 no-padding item-start>PROC Code</ion-note>
+              <ion-item text-wrap ion-col col-10>{{usage.get('proc').value?.proc}}
+                <p>{{usage.get('proc').value?.description}}</p>
+              </ion-item>
+              <button ion-col col-2 type="button" ion-button icon-only clear color="primary" (click)="selectUsageEntity(usage.get('proc'),procs,'PROC Code')">
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!--
+      EMKG Haut
+    -->
+    <ion-card>
+      <ion-card-header>
+        EMKG Kriterien - Haut
+      </ion-card-header>
+      <ion-card-content formGroupName="emkgSkin">
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
+            <ion-note col-12 no-padding item-start>{{emkgSkin[0].label}}</ion-note>
+            <ion-item>
+              <ion-range formControlName="area" min="0" max="1" snaps="true" color="primary">
+                <ion-label range-left>{{emkgSkin[0].options[0].label}}</ion-label>
+                <ion-label range-right>{{emkgSkin[0].options[1].label}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <ion-item text-center>
+              <p>{{emkgSkin[0].options[usage.get('emkgSkin.area').value].description}}</p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
+            <ion-note col-12 no-padding item-start>{{emkgSkin[1].label}}</ion-note>
+            <ion-item>
+              <ion-range formControlName="duration" min="0" max="1" snaps="true" color="primary">
+                <ion-label range-left>{{emkgSkin[1].options[0].label}}</ion-label>
+                <ion-label range-right>{{emkgSkin[1].options[1].label}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <ion-item text-center>
+              <p>{{emkgSkin[1].options[usage.get('emkgSkin.duration').value].description}}</p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!--
+      EMKG Einatmen
+    -->
+    <ion-card>
+      <ion-card-header>
+        EMKG Kriterien - Einatmen
+      </ion-card-header>
+      <ion-card-content formGroupName="emkgInhalation">
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
+            <ion-note col-12 no-padding item-start>{{emkgInhalation[0].label}}</ion-note>
+            <ion-item>
+              <ion-range formControlName="quantity" min="0" max="2" snaps="true" color="primary">
+                <ion-label range-left>{{emkgInhalation[0].options[0].label}}</ion-label>
+                <ion-label range-right>{{emkgInhalation[0].options[1].label}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <ion-item text-center>
+              <p>{{emkgInhalation[0].options[usage.get('emkgInhalation.quantity').value].description}}</p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
+            <ion-note col-12 no-padding item-start>{{emkgInhalation[1].label}}</ion-note>
+            <ion-item>
+              <ion-range formControlName="release" min="0" max="2" snaps="true" color="primary">
+                <ion-label range-left>{{emkgInhalation[1].options[0].label}}</ion-label>
+                <ion-label range-right>{{emkgInhalation[1].options[2].label}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <ion-item text-center>
+              <p>{{emkgInhalation[1].options[usage.get('emkgInhalation.release').value].description}}</p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+
+
     <ion-card>
       <ion-card-header>
         Debug
