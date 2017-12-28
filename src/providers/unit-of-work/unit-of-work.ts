@@ -6,7 +6,7 @@ import { ProcRepository } from '../repositories/proc-repository/proc-repository'
 import { ProcedureRepository } from '../repositories/procedure-repository/procedure-repository';
 import { ScopeRepository } from '../repositories/scope-repository/scope-repository';
 import { PlantRepository } from '../repositories/plant-repository/plant-repository';
-import { PurposeRepository } from '../repositories/Purpose-repository/Purpose-repository';
+import { PurposeRepository } from '../repositories/purpose-repository/purpose-repository';
 
 /*
   Generated class for the UnitOfWorkProvider provider.

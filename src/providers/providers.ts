@@ -12,4 +12,4 @@ export { ProcRepository } from './repositories/proc-repository/proc-repository';
 export { ProcedureRepository } from './repositories/procedure-repository/procedure-repository';
 export { ScopeRepository } from './repositories/scope-repository/scope-repository';
 export { PlantRepository } from './repositories/plant-repository/plant-repository';
-export { PurposeRepository } from './repositories/Purpose-repository/Purpose-repository';
+export { PurposeRepository } from './repositories/purpose-repository/purpose-repository';
