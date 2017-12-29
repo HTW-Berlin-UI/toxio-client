@@ -21,22 +21,22 @@
       </ion-card-header>
       <ion-card-content>
         <ion-grid class="usage-grid" padding-vertical formArrayName="plants" *ngFor="let plantControl of usage.get('plants').controls; let i = index;">
-          <ion-row align-items-end [formGroupName]="i">
+          <ion-row align-items-center [formGroupName]="i">
             <ion-note col-12 no-padding item-start>Anlage {{i+1}}</ion-note>
-            <h2 ion-col col-12 text-right> {{plantControl.get('plant').value.name}} </h2>
-            <ion-item ion-col>
-              <ion-label color="primary" floating>Menge</ion-label>
-              <ion-input type="number" formControlName="amount"></ion-input>
-            </ion-item>
-            <ion-item ion-col>
-              <ion-label color="primary" floating>Einheit</ion-label>
-              <ion-select formControlName="unit" interface="action-sheet" cancelText="Abbrechen">
-                <ion-option *ngFor="let u of units" value="{{u}}">{{u}}</ion-option>
-              </ion-select>
-            </ion-item>
+            <ion-item ion-col col-10>{{plantControl.get('plant').value.name}}</ion-item>
             <button ion-col col-2 type="button" ion-button icon-only clear color="danger" (click)="removePlant(i)">
               <ion-icon name="trash"></ion-icon>
             </button>
+            <ion-item ion-col>
+              <!-- <ion-label color="primary" >Menge</ion-label> -->
+              <ion-input type="number" clearInput placeholder="Menge" formControlName="amount"></ion-input>
+            </ion-item>
+            <ion-item ion-col>
+              <!-- <ion-label color="primary" floating>Einheit</ion-label> -->
+              <ion-select placeholder="Einheit" formControlName="unit" interface="action-sheet" cancelText="Abbrechen">
+                <ion-option *ngFor="let u of units" value="{{u}}">{{u}}</ion-option>
+              </ion-select>
+            </ion-item>
           </ion-row>
         </ion-grid>
         <ion-item text-center>
@@ -158,13 +158,14 @@
         <ion-grid class="usage-grid" padding-vertical>
           <ion-row>
             <ion-note col-12 no-padding item-start>{{emkgSkin[0].label}}</ion-note>
-            <ion-item>
+            <ion-item col-4>
+              {{emkgSkin[0].options[usage.get('emkgSkin.area').value].label}}
+            </ion-item>
+            <ion-item col-8>
               <ion-range formControlName="area" min="0" max="1" snaps="true" color="primary">
-                <ion-label range-left>{{emkgSkin[0].options[0].label}}</ion-label>
-                <ion-label range-right>{{emkgSkin[0].options[1].label}}</ion-label>
               </ion-range>
             </ion-item>
-            <ion-item text-center>
+            <ion-item>
               <p>{{emkgSkin[0].options[usage.get('emkgSkin.area').value].description}}</p>
             </ion-item>
           </ion-row>
@@ -173,13 +174,12 @@
         <ion-grid class="usage-grid" padding-vertical>
           <ion-row>
             <ion-note col-12 no-padding item-start>{{emkgSkin[1].label}}</ion-note>
-            <ion-item>
+            <ion-item col-4>{{emkgSkin[1].options[usage.get('emkgSkin.duration').value].label}}</ion-item>
+            <ion-item col-8>
               <ion-range formControlName="duration" min="0" max="1" snaps="true" color="primary">
-                <ion-label range-left>{{emkgSkin[1].options[0].label}}</ion-label>
-                <ion-label range-right>{{emkgSkin[1].options[1].label}}</ion-label>
               </ion-range>
             </ion-item>
-            <ion-item text-center>
+            <ion-item>
               <p>{{emkgSkin[1].options[usage.get('emkgSkin.duration').value].description}}</p>
             </ion-item>
           </ion-row>
@@ -200,13 +200,12 @@
         <ion-grid class="usage-grid" padding-vertical>
           <ion-row>
             <ion-note col-12 no-padding item-start>{{emkgInhalation[0].label}}</ion-note>
-            <ion-item>
+            <ion-item col-4>{{emkgInhalation[0].options[usage.get('emkgInhalation.quantity').value].label}}</ion-item>
+            <ion-item col-8>
               <ion-range formControlName="quantity" min="0" max="2" snaps="true" color="primary">
-                <ion-label range-left>{{emkgInhalation[0].options[0].label}}</ion-label>
-                <ion-label range-right>{{emkgInhalation[0].options[2].label}}</ion-label>
               </ion-range>
             </ion-item>
-            <ion-item text-center>
+            <ion-item>
               <p>{{emkgInhalation[0].options[usage.get('emkgInhalation.quantity').value].description}}</p>
             </ion-item>
           </ion-row>
@@ -215,13 +214,12 @@
         <ion-grid class="usage-grid" padding-vertical>
           <ion-row>
             <ion-note col-12 no-padding item-start>{{emkgInhalation[1].label}}</ion-note>
-            <ion-item>
+            <ion-item col-4>{{emkgInhalation[1].options[usage.get('emkgInhalation.release').value].label}}</ion-item>
+            <ion-item col-8>
               <ion-range formControlName="release" min="0" max="2" snaps="true" color="primary">
-                <ion-label range-left>{{emkgInhalation[1].options[0].label}}</ion-label>
-                <ion-label range-right>{{emkgInhalation[1].options[2].label}}</ion-label>
               </ion-range>
             </ion-item>
-            <ion-item text-center>
+            <ion-item>
               <p>{{emkgInhalation[1].options[usage.get('emkgInhalation.release').value].description}}</p>
             </ion-item>
           </ion-row>
@@ -239,8 +237,10 @@
         <p>Dirty: {{ usage.dirty }}</p>
         <p>Touched: {{ usage.touched }}</p>
         <p>Valid: {{ usage.valid }}</p>
-        <p>Value: {{ usage.value | json }}</p>
-
+        <p>Value: </p>
+        <pre>
+         {{ usage.value | json }}
+        </pre>
         <button ion-button type="submit" [disabled]="!usage.valid">Submit</button>
       </ion-card-content>
     </ion-card>

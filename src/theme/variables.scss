@@ -76,6 +76,9 @@ $fa-font-path: $font-path;
 
 //Overriding Ionic Sass Variables
 // --------------------------------------------------
+
+$text-color: color($colors, dark, base);
+
 $toxio-thumbail-size: 150px;
 $item-ios-thumbnail-size: $toxio-thumbail-size;
 $item-md-thumbnail-size: $toxio-thumbail-size;

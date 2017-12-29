@@ -9,4 +9,14 @@ page-add-usage {
     .card-ios ion-grid.usage-grid:not(:first-child) {
         @include hs-attributes-border($hairlines-width,$list-ios-border-color);
     }
+
+    .usage-grid {
+        ion-select {
+            max-width: 100%;
+        }
+    }
+    ion-card-header.card-header {
+        font-weight: bold;
+        color: color($colors, dark, base);
+    }
 }
