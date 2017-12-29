@@ -13,3 +13,5 @@ export { ProcedureRepository } from './repositories/procedure-repository/procedu
 export { ScopeRepository } from './repositories/scope-repository/scope-repository';
 export { PlantRepository } from './repositories/plant-repository/plant-repository';
 export { PurposeRepository } from './repositories/purpose-repository/purpose-repository';
+export { UsageRepository } from './repositories/usage-repository/usage-repository';
+export { EMKGProvider } from './emkg/emkg';

@@ -6,14 +6,7 @@ import {
     AlertController,
     ModalController
 } from 'ionic-angular';
-import {
-    FormGroup,
-    FormControl,
-    FormArray,
-    FormBuilder,
-    Validators,
-    AbstractControl
-} from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, SELECT_ENTITY_MODAL_PAGE } from '../pages.constants';
 import {
     HazardousSubstance,
@@ -23,14 +16,14 @@ import {
     Procedure,
     Scope,
     Material,
-    Purpose
+    Purpose,
+    Syncable
 } from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../app/app.config';
-import { UnitOfWork } from '../../providers/providers';
+import { UnitOfWork, EMKGProvider } from '../../providers/providers';
 import { Observable } from 'rxjs/Observable';
-import { EMKG } from '../../models/models';
-
+import { Usage } from '../../interfaces/usage/usage';
 /**
  * Generated class for the AddUsagePage page.
  *
@@ -55,7 +48,8 @@ export class AddUsagePage {
         public fb: FormBuilder,
         private alertController: AlertController,
         private modalController: ModalController,
-        private unitOfWork: UnitOfWork
+        private unitOfWork: UnitOfWork,
+        public EMGK: EMKGProvider
     ) {
         this.usage = this.fb.group({
             plants: this.fb.array([], Validators.required),
@@ -71,10 +65,12 @@ export class AddUsagePage {
             emkgInhalation: this.fb.group({
                 quantity: [0, Validators.required],
                 release: [0, Validators.required]
+            }),
+            emkgFire: this.fb.group({
+                quantity: [0, Validators.required],
+                release: [0, Validators.required]
             })
         });
-
-        console.log(this.emkgInhalation[0].options[1].label);
     }
 
     public addPlant(): void {
@@ -109,6 +105,10 @@ export class AddUsagePage {
         selectModal.present();
     }
 
+    public get plantControls(): AbstractControl[] {
+        return (<FormArray>this.usage.get('plants')).controls;
+    }
+
     public get plants(): Observable<Plant[]> {
         return this.unitOfWork.plantRepository.all();
     }
@@ -130,14 +130,6 @@ export class AddUsagePage {
         return this.unitOfWork.purposeRepository.all();
     }
 
-    public get emkgSkin(): Array<any> {
-        return EMKG.SKIN;
-    }
-
-    public get emkgInhalation(): Array<any> {
-        return EMKG.INHALATION;
-    }
-
     public createPlantControl(): FormGroup {
         return this.fb.group({
             plant: [<Plant>null, Validators.required],
@@ -147,7 +139,32 @@ export class AddUsagePage {
     }
 
     public save(): void {
-        console.log('save');
+        const date = new Date().toISOString();
+
+        const HsUsage = Object.assign(
+            {
+                hazardousSubstance: this.hazardousSubstance,
+                created: date,
+                updated: date
+            },
+            this.usage.value
+        ) as Usage;
+
+        this.unitOfWork.usageRepository.save(HsUsage).then(response => {
+            this.unitOfWork
+                .sync()
+                .then(syncResponse => {
+                    this.alertController
+                        .create({
+                            title: this.hazardousSubstance.name,
+                            subTitle: 'Anwendung gespeichert',
+                            message: syncResponse,
+                            buttons: ['Juhu']
+                        })
+                        .present();
+                })
+                .catch(console.warn);
+        });
     }
 
     ionViewDidLoad() {

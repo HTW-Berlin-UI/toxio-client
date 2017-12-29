@@ -7,6 +7,7 @@ import { ProcedureRepository } from '../repositories/procedure-repository/proced
 import { ScopeRepository } from '../repositories/scope-repository/scope-repository';
 import { PlantRepository } from '../repositories/plant-repository/plant-repository';
 import { PurposeRepository } from '../repositories/purpose-repository/purpose-repository';
+import { UsageRepository } from '../repositories/usage-repository/usage-repository';
 
 /*
   Generated class for the UnitOfWorkProvider provider.
@@ -25,7 +26,8 @@ export class UnitOfWork {
         public procedureRepository: ProcedureRepository,
         public scopeRepository: ScopeRepository,
         public plantRepository: PlantRepository,
-        public purposeRepository: PurposeRepository
+        public purposeRepository: PurposeRepository,
+        public usageRepository: UsageRepository
     ) {
         console.log('UnitOfWork initiated');
     }
@@ -34,6 +36,14 @@ export class UnitOfWork {
         if (this.network.isOnline) {
             this.updateData();
         }
+    }
+
+    public sync(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            console.log(this.network.isOnline);
+            if (!this.network.isOnline) reject(new Error('Offline: Could not sync'));
+            resolve('Syncing...');
+        });
     }
 
     private updateData(): void {

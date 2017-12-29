@@ -26,7 +26,9 @@ import {
     ScopeRepository,
     PlantRepository,
     PurposeRepository,
-    SafetyDataSheetProvider
+    UsageRepository,
+    SafetyDataSheetProvider,
+    EMKGProvider
 } from '../providers/providers';
 
 @NgModule({
@@ -57,11 +59,13 @@ import {
         ScopeRepository,
         PlantRepository,
         PurposeRepository,
+        UsageRepository,
         QRCodeProvider,
         QRScanner,
         DocumentViewer,
         SocialSharing,
         File,
+        EMKGProvider,
         { provide: ErrorHandler, useClass: ToxioErrorHandler }
     ]
 })

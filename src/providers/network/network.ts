@@ -10,15 +10,14 @@ import { ToastController } from 'ionic-angular';
 */
 @Injectable()
 export class NetworkProvider {
-    public get isOnline(): boolean {
-        return this.network.type !== 'none';
-    }
+    public isOnline: boolean;
 
     constructor(private network: Network, private toastCtrl: ToastController) {
         console.log('NetworkProvider initiated');
 
         this.network.onConnect().subscribe(() => {
             setTimeout(() => {
+                this.isOnline = true;
                 this.toastCtrl
                     .create({
                         message: 'Online! Daten werden synchronisiert... 👍 ',
@@ -29,6 +28,7 @@ export class NetworkProvider {
             }, 3000);
         });
         this.network.onDisconnect().subscribe(() => {
+            this.isOnline = false;
             this.toastCtrl
                 .create({
                     message: 'Netzwerkverbidung verloren 😱',
@@ -37,5 +37,7 @@ export class NetworkProvider {
                 })
                 .present();
         });
+
+        this.isOnline = this.network.type !== 'none';
     }
 }

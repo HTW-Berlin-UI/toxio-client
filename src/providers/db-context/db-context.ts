@@ -14,9 +14,9 @@ export class DbContext {
         console.log('DbContext initiated');
     }
 
-    public save(key: string, value: Syncable[]): void {
-        this.storage.set(key, value);
+    public save<T>(key: string, value: T): Promise<T> {
         console.log(`${key} saved to local db`);
+        return this.storage.set(key, value);
     }
 
     public load<T>(key: string): Promise<T> {

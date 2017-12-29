@@ -12,8 +12,8 @@ export class Repository<TEntity extends Syncable> {
         console.log(`Repository for ${identifier} initiated`);
     }
 
-    public save(...elements: TEntity[]): void {
-        this.dbContext.save(this.identifier, elements);
+    public save(...elements: TEntity[]): Promise<TEntity[]> {
+        return this.dbContext.save(this.identifier, elements);
     }
 
     public all(): Observable<TEntity[]> {
