@@ -29,7 +29,7 @@
           <ion-icon name="attach"></ion-icon>
           Datenblatt
         </button>
-        <button ion-button (click)="addUsage(hazardousSubstance)">
+        <button *ngIf="appConfig.current.user.can.addUsage" ion-button (click)="addUsage(hazardousSubstance)">
           <ion-icon name="options"></ion-icon>
           Anwendung
         </button>

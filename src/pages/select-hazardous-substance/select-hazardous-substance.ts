@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { APP_CONFIG } from '../../app/app.config';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { HazardousSubstanceRepository, SafetyDataSheetProvider } from '../../providers/providers';
-import { HazardousSubstance } from '../../interfaces/interfaces';
+import { HazardousSubstance, Settings } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs/Observable';
 import {
     SINGLE_HAZARDOUS_SUBSTANCE_PAGE,
@@ -28,6 +29,7 @@ export class SelectHazardousSubstancePage {
     public qrScannerStatus: QRScannerStatus;
 
     constructor(
+        @Inject(APP_CONFIG) public appConfig: Settings,
         public navController: NavController,
         private alertController: AlertController,
         private hazardousSubstancesRepository: HazardousSubstanceRepository,

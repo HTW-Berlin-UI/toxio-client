@@ -37,7 +37,7 @@ export class SingleHazardousSubstancePage {
     public qrCodeValue: string;
 
     constructor(
-        @Inject(APP_CONFIG) private appConfig: Settings,
+        @Inject(APP_CONFIG) public appConfig: Settings,
         private platform: Platform,
         private actionSheetController: ActionSheetController,
         private alertController: AlertController,
