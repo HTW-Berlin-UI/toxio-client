@@ -1,6 +1,5 @@
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
-import { Syncable } from '../../interfaces/interfaces';
 
 /*
   Generated class for the DbContext provider.

@@ -7,7 +7,11 @@ import {
     ModalController
 } from 'ionic-angular';
 import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { SELECT_HAZARDOUS_SUBSTANCE_PAGE, SELECT_ENTITY_MODAL_PAGE } from '../pages.constants';
+import {
+    SELECT_HAZARDOUS_SUBSTANCE_PAGE,
+    SELECT_ENTITY_MODAL_PAGE,
+    WELCOME_PAGE
+} from '../pages.constants';
 import {
     HazardousSubstance,
     Settings,
@@ -16,8 +20,7 @@ import {
     Procedure,
     Scope,
     Material,
-    Purpose,
-    Syncable
+    Purpose
 } from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../app/app.config';
@@ -159,7 +162,14 @@ export class AddUsagePage {
                             title: this.hazardousSubstance.name,
                             subTitle: 'Anwendung gespeichert',
                             message: syncResponse,
-                            buttons: ['Juhu']
+                            buttons: [
+                                {
+                                    text: 'Zurück zum Start',
+                                    handler: () => {
+                                        this.navController.push(WELCOME_PAGE);
+                                    }
+                                }
+                            ]
                         })
                         .present();
                 })
