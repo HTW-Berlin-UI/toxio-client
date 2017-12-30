@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { Repository } from '../../../models/models';
-import { Proc } from '../../../interfaces/interfaces';
+import { Repository } from '../../models/models';
+import { Proc } from '../../interfaces/interfaces';
 /*
   Generated class for the ProcRepositoryProvider provider.
 

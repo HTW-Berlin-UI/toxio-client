@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { Repository } from '../../../models/models';
-import { HazardousSubstance } from '../../../interfaces/interfaces';
+import { Repository } from '../../models/models';
+import { HazardousSubstance } from '../../interfaces/interfaces';
 /*
   Generated class for the HazardousSubstanceRepositoryProvider provider.
 

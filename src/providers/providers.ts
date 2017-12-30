@@ -4,14 +4,12 @@ export { DbContext } from './db-context/db-context';
 export { UnitOfWork } from './unit-of-work/unit-of-work';
 export { QRCodeProvider } from './qr-code/qr-code';
 export { SafetyDataSheetProvider } from './safety-data-sheet/safety-data-sheet';
-export {
-    HazardousSubstanceRepository
-} from './repositories/hazardous-substance-repository/hazardous-substance-repository';
-export { MaterialRepository } from './repositories/material-repository/material-repository';
-export { ProcRepository } from './repositories/proc-repository/proc-repository';
-export { ProcedureRepository } from './repositories/procedure-repository/procedure-repository';
-export { ScopeRepository } from './repositories/scope-repository/scope-repository';
-export { PlantRepository } from './repositories/plant-repository/plant-repository';
-export { PurposeRepository } from './repositories/purpose-repository/purpose-repository';
-export { UsageRepository } from './repositories/usage-repository/usage-repository';
+export { HazardousSubstanceRepository } from './repositories/hazardous-substance-repository';
+export { MaterialRepository } from './repositories/material-repository';
+export { ProcRepository } from './repositories/proc-repository';
+export { ProcedureRepository } from './repositories/procedure-repository';
+export { ScopeRepository } from './repositories/scope-repository';
+export { PlantRepository } from './repositories/plant-repository';
+export { PurposeRepository } from './repositories/purpose-repository';
+export { UsageRepository } from './repositories/usage-repository';
 export { EMKGProvider } from './emkg/emkg';

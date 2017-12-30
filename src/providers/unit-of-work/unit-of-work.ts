@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { NetworkProvider, DataExchangeProvider } from '../providers';
-import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository/hazardous-substance-repository';
-import { MaterialRepository } from '../repositories/material-repository/material-repository';
-import { ProcRepository } from '../repositories/proc-repository/proc-repository';
-import { ProcedureRepository } from '../repositories/procedure-repository/procedure-repository';
-import { ScopeRepository } from '../repositories/scope-repository/scope-repository';
-import { PlantRepository } from '../repositories/plant-repository/plant-repository';
-import { PurposeRepository } from '../repositories/purpose-repository/purpose-repository';
-import { UsageRepository } from '../repositories/usage-repository/usage-repository';
+import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository';
+import { MaterialRepository } from '../repositories/material-repository';
+import { ProcRepository } from '../repositories/proc-repository';
+import { ProcedureRepository } from '../repositories/procedure-repository';
+import { ScopeRepository } from '../repositories/scope-repository';
+import { PlantRepository } from '../repositories/plant-repository';
+import { PurposeRepository } from '../repositories/purpose-repository';
+import { UsageRepository } from '../repositories/usage-repository';
 
 /*
   Generated class for the UnitOfWorkProvider provider.

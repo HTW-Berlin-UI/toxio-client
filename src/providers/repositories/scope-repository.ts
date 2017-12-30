@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { Repository } from '../../../models/models';
-import { Scope } from '../../../interfaces/interfaces';
+import { Repository } from '../../models/models';
+import { Scope } from '../../interfaces/interfaces';
 /*
   Generated class for the ScopeRepositoryProvider provider.
 

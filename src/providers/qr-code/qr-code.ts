@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG } from '../../app/app.config';
 import { Settings, HazardousSubstance } from '../../interfaces/interfaces';
-import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository/hazardous-substance-repository';
+import { HazardousSubstanceRepository } from '../repositories/hazardous-substance-repository';
 
 /*
   Generated class for the QrCodeProvider provider.
