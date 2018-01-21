@@ -13,4 +13,5 @@ export interface Settings {
             id: number;
         };
     };
+    apiUrl?: string;
 }

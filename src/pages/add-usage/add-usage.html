@@ -290,9 +290,7 @@
         <p>Touched: {{ usage.touched }}</p>
         <p>Valid: {{ usage.valid }}</p>
         <p>Value: </p>
-        <pre>
-         {{ usage.value | json }}
-        </pre>
+        <pre>{{ usage.value | json }}</pre>
         <button ion-button block type="submit" [disabled]="!usage.valid">Submit</button>
       </ion-card-content>
     </ion-card>

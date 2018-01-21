@@ -1,6 +1,13 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { HazardousSubstance, Response, UsageResources } from '../../interfaces/interfaces';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+import {
+    RawHazardousSubstance,
+    HazardousSubstance,
+    Response,
+    UsageResources,
+    Settings
+} from '../../interfaces/interfaces';
+import { APP_CONFIG } from '../../app/app.config';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -13,11 +20,15 @@ import { catchError, tap, map } from 'rxjs/operators';
 */
 @Injectable()
 export class DataExchangeProvider {
-    constructor(public http: HttpClient) {
+    private endpoints = {
+        hazardousSubstances: '/hazardsubstances'
+    };
+
+    constructor(@Inject(APP_CONFIG) private appConfig: Settings, public http: HttpClient) {
         console.log('DataExchangeProvider initiated');
     }
 
-    public getHazardousSubstances(): Observable<HazardousSubstance[]> {
+    public getHazardousSubstancesFromAssets(): Observable<HazardousSubstance[]> {
         return this.http
             .get<Response<HazardousSubstance[]>>('./assets/data/hazardous-substances.json')
             .pipe(
@@ -25,6 +36,29 @@ export class DataExchangeProvider {
                 map(response => response.data.hazardousSubstances),
                 catchError(this.handleError)
             );
+    }
+
+    public getHazardousSubstances(): Observable<HazardousSubstance[]> {
+        return this.http
+            .get<HazardousSubstance[]>(this.appConfig.apiUrl + this.endpoints.hazardousSubstances)
+            .pipe(tap(console.log), map(this.mapHazardousSubstances), catchError(this.handleError));
+    }
+
+    private mapHazardousSubstances(response: RawHazardousSubstance[]): HazardousSubstance[] {
+        return response.map(rawHazardousSubstance => {
+            return {
+                id: rawHazardousSubstance.substance_id,
+                hsNumber: rawHazardousSubstance.hs_number,
+                name: rawHazardousSubstance.substance_name,
+                manufacturer: rawHazardousSubstance.manufacturer_id.toString(),
+                active: !!rawHazardousSubstance.active,
+                approved: !!rawHazardousSubstance.approved,
+                substanceCAS: rawHazardousSubstance.substance_cas,
+                substanceEG: rawHazardousSubstance.substance_eg,
+                created: '',
+                updated: ''
+            };
+        });
     }
 
     public getUsageResources(): Observable<UsageResources> {
