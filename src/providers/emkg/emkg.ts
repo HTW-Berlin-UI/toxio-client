@@ -95,6 +95,31 @@ export class EMKGProvider {
     };
 
     public fire = {
+        airSupply: {
+            label: 'Luftversorgung',
+            options: [
+                {
+                    label: 'Gering',
+                    code: 'LOW',
+                    descriptions: ['Ungenügend']
+                },
+                {
+                    label: 'Mittel',
+                    code: 'MEDIUM',
+                    descriptions: ['Allgemein']
+                },
+                {
+                    label: 'Hoch',
+                    code: 'HIGH',
+                    descriptions: ['Technische Absaugung']
+                },
+                {
+                    label: 'Egal',
+                    code: 'HIGH',
+                    descriptions: ['Geschlossenes System']
+                }
+            ]
+        },
         quantity: {
             label: 'Verwendete Menge',
             options: [
@@ -148,5 +173,5 @@ export class EMKGProvider {
         }
     };
 
-    constructor() {}
+    constructor() { }
 }

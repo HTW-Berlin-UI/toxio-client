@@ -70,8 +70,11 @@ export class AddUsagePage {
                 release: [0, Validators.required]
             }),
             emkgFire: this.fb.group({
+                airSupply: [0, Validators.required],
                 quantity: [0, Validators.required],
-                release: [0, Validators.required]
+                release: [0, Validators.required],
+                closedSystem: [false, Validators.required],
+                flammable: [false, Validators.required]
             })
         });
     }
@@ -188,9 +191,9 @@ export class AddUsagePage {
                 return this.unitOfWork.hazardousSubstanceRepository
                     .all()
                     .pipe(
-                        tap(hazardousSubstances => {
-                            this.hazardousSubstance = hazardousSubstances.shift();
-                        })
+                    tap(hazardousSubstances => {
+                        this.hazardousSubstance = hazardousSubstances.shift();
+                    })
                     )
                     .toPromise();
             }

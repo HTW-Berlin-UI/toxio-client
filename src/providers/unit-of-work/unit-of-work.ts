@@ -47,7 +47,7 @@ export class UnitOfWork {
     }
 
     private updateData(): void {
-        this.dataExchange.getHazardousSubstances().subscribe(hazardousSubstances => {
+        this.dataExchange.getHazardousSubstancesFromAssets().subscribe(hazardousSubstances => {
             this.hazardousSubstanceRepository.save(...hazardousSubstances);
         });
         this.dataExchange.getUsageResources().subscribe(usageResources => {

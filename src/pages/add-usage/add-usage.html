@@ -247,6 +247,22 @@
 
         <ion-grid class="usage-grid" padding-vertical>
           <ion-row>
+            <ion-note color="primary" col-12 no-padding item-start>{{EMGK.fire.airSupply.label}}</ion-note>
+            <ion-item col-4>{{EMGK.fire.airSupply.options[usage.get('emkgFire.airSupply').value]?.label}}</ion-item>
+            <ion-item col-8>
+              <ion-range formControlName="airSupply" min="0" max="3" snaps="true" color="primary">
+              </ion-range>
+            </ion-item>
+            <ion-item>
+              <p margin-bottom text-wrap *ngFor="let description of EMGK.fire.airSupply.options[usage.get('emkgFire.airSupply').value]?.descriptions">
+                {{description}}
+              </p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
             <ion-note color="primary" col-12 no-padding item-start>{{EMGK.fire.quantity.label}}</ion-note>
             <ion-item col-4>{{EMGK.fire.quantity.options[usage.get('emkgFire.quantity').value]?.label}}</ion-item>
             <ion-item col-8>
@@ -273,6 +289,20 @@
               <p margin-bottom text-wrap *ngFor="let description of EMGK.fire.release.options[usage.get('emkgFire.release').value]?.descriptions">
                 {{description}}
               </p>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid class="usage-grid" padding-vertical>
+          <ion-row>
+            <ion-note color="primary" col-12 padding-bottom item-start>Zusätzliche Informationen</ion-note>
+            <ion-item>
+              <ion-label>Geschlossenes System</ion-label>
+              <ion-checkbox padding-right item-right formControlName="closedSystem"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Brennbar</ion-label>
+              <ion-checkbox padding-right item-right formControlName="flammable"></ion-checkbox>
             </ion-item>
           </ion-row>
         </ion-grid>
