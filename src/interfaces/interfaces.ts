@@ -12,4 +12,4 @@ export { Procedure } from './procedure/procedure';
 export { Plant } from './plant/plant';
 export { Purpose } from './purpose/purpose';
 export { UsageResources, UsageResourceEntity } from './usage-resources/usage-resources';
-export { Usage } from './usage/usage';
+export { Usage, RawUsage } from './usage/usage';

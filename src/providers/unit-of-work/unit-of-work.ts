@@ -9,6 +9,8 @@ import { PlantRepository } from '../repositories/plant-repository';
 import { PurposeRepository } from '../repositories/purpose-repository';
 import { UsageRepository } from '../repositories/usage-repository';
 
+import { Usage } from '../../interfaces/interfaces';
+
 /*
   Generated class for the UnitOfWorkProvider provider.
 
@@ -38,16 +40,22 @@ export class UnitOfWork {
         }
     }
 
-    public sync(): Promise<string> {
+    public sync(usage: Usage): Promise<string> {
         return new Promise((resolve, reject) => {
             console.log(this.network.isOnline);
-            if (!this.network.isOnline) reject(new Error('Offline: Could not sync'));
-            resolve('Syncing...');
+            if (!this.network.isOnline)
+                resolve(
+                    'Sie sind offline. Die Anwendung wird synchronisiert sobald Sie eine Verbindung mit dem Internet herstellen.'
+                );
+            this.dataExchange.postUsage(usage).subscribe(response => {
+                console.log(response);
+                resolve('Syncing...');
+            });
         });
     }
 
     private updateData(): void {
-        this.dataExchange.getHazardousSubstancesFromAssets().subscribe(hazardousSubstances => {
+        this.dataExchange.getHazardousSubstances().subscribe(hazardousSubstances => {
             this.hazardousSubstanceRepository.save(...hazardousSubstances);
         });
         this.dataExchange.getUsageResources().subscribe(usageResources => {

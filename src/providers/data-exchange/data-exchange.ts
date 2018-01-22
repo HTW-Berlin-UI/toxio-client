@@ -1,16 +1,19 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import {
     RawHazardousSubstance,
     HazardousSubstance,
     Response,
     UsageResources,
-    Settings
+    Settings,
+    Usage,
+    RawUsage
 } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, tap, map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http/src/response';
 
 /*
   Generated class for the DataExchangeProvider provider.
@@ -20,8 +23,14 @@ import { catchError, tap, map } from 'rxjs/operators';
 */
 @Injectable()
 export class DataExchangeProvider {
+    private emkgStringValues = ['LOW', 'MIDDLE', 'HIGH', 'VERY_HIGH'];
+
     private endpoints = {
-        hazardousSubstances: '/hazardsubstances'
+        hazardousSubstances: '/hazardsubstances',
+        usageResources: `/usages/resources/${this.appConfig.current.organization.id}/${
+            this.appConfig.current.unit.id
+        }`,
+        usages: '/usages'
     };
 
     constructor(@Inject(APP_CONFIG) private appConfig: Settings, public http: HttpClient) {
@@ -50,7 +59,7 @@ export class DataExchangeProvider {
                 id: rawHazardousSubstance.substance_id,
                 hsNumber: rawHazardousSubstance.hs_number,
                 name: rawHazardousSubstance.substance_name,
-                manufacturer: rawHazardousSubstance.manufacturer_id.toString(),
+                manufacturer: `Hersteller ${rawHazardousSubstance.substance_name}`,
                 active: !!rawHazardousSubstance.active,
                 approved: !!rawHazardousSubstance.approved,
                 substanceCAS: rawHazardousSubstance.substance_cas,
@@ -61,10 +70,45 @@ export class DataExchangeProvider {
         });
     }
 
-    public getUsageResources(): Observable<UsageResources> {
+    private mapUsage(usage: Usage): RawUsage {
+        return {
+            excrete: this.emkgStringValues[usage.emkgInhalation.release],
+            surface: this.emkgStringValues[usage.emkgSkin.area],
+            scope_id: usage.scope.id,
+            org_id: this.appConfig.current.organization.id,
+            air_supply: this.emkgStringValues[usage.emkgFire.airSupply],
+            qty: this.emkgStringValues[usage.emkgInhalation.quantity],
+            proc_id: usage.proc.id,
+            procedure_id: usage.procedure.id,
+            closed_system: usage.emkgFire.closedSystem ? 'YES' : 'NO',
+            dusting: this.emkgStringValues[usage.emkgFire.release],
+            frequency: this.emkgStringValues[usage.emkgFire.quantity],
+            purpose_id: usage.purpose.id,
+            plant_ids: usage.plants.map(usagePlant => usagePlant.plant.id),
+            duration: this.emkgStringValues[usage.emkgSkin.duration],
+            flammable: usage.emkgFire.flammable ? 'YES' : 'NO',
+            hs_id: usage.hazardousSubstance.id,
+            material_id: usage.material.id,
+            active: 1
+        };
+    }
+
+    public postUsage(usage: Usage): Observable<Object> {
+        return this.http
+            .post(this.appConfig.apiUrl + this.endpoints.usages, this.mapUsage(usage))
+            .pipe(tap(console.log), catchError(this.handleError));
+    }
+
+    public getUsageResourcesFromAssets(): Observable<UsageResources> {
         return this.http
             .get<Response<UsageResources>>('./assets/data/usage-resources.json')
             .pipe(tap(console.log), map(response => response.data), catchError(this.handleError));
+    }
+
+    public getUsageResources(): Observable<UsageResources> {
+        return this.http
+            .get<Response<UsageResources>>(this.appConfig.apiUrl + this.endpoints.usageResources)
+            .pipe(tap(console.log), catchError(this.handleError));
     }
 
     private handleError(err: HttpErrorResponse): ErrorObservable {

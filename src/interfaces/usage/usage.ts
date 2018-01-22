@@ -20,9 +20,9 @@ export interface Usage extends Syncable {
     plants: UsagePlant[];
     procedure: Procedure;
     scope: Scope;
-    Purpose: Purpose;
-    Material: Material;
-    Proc: Proc;
+    purpose: Purpose;
+    material: Material;
+    proc: Proc;
     emkgSkin: {
         area: number;
         duration: number;
@@ -32,7 +32,31 @@ export interface Usage extends Syncable {
         release: number;
     };
     emkgFire: {
+        airSupply: number;
         quantity: number;
         release: number;
+        closedSystem: boolean;
+        flammable: boolean;
     };
+}
+
+export interface RawUsage {
+    excrete: string;
+    surface: string;
+    scope_id: number;
+    org_id: number;
+    air_supply: string;
+    qty: string;
+    proc_id: number;
+    procedure_id: number;
+    closed_system: string;
+    dusting: string;
+    frequency: string;
+    purpose_id: number;
+    plant_ids: Array<number>;
+    duration: string;
+    flammable: string;
+    hs_id: number;
+    material_id: number;
+    active: number;
 }

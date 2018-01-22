@@ -10,7 +10,8 @@ import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '
 import {
     SELECT_HAZARDOUS_SUBSTANCE_PAGE,
     SELECT_ENTITY_MODAL_PAGE,
-    WELCOME_PAGE
+    WELCOME_PAGE,
+    ADD_USAGE_PAGE
 } from '../pages.constants';
 import {
     HazardousSubstance,
@@ -20,13 +21,13 @@ import {
     Procedure,
     Scope,
     Material,
-    Purpose
+    Purpose,
+    Usage
 } from '../../interfaces/interfaces';
 import { tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../app/app.config';
 import { UnitOfWork, EMKGProvider } from '../../providers/providers';
 import { Observable } from 'rxjs/Observable';
-import { Usage } from '../../interfaces/usage/usage';
 /**
  * Generated class for the AddUsagePage page.
  *
@@ -158,7 +159,7 @@ export class AddUsagePage {
 
         this.unitOfWork.usageRepository.save(HsUsage).then(response => {
             this.unitOfWork
-                .sync()
+                .sync(HsUsage)
                 .then(syncResponse => {
                     this.alertController
                         .create({
@@ -167,9 +168,17 @@ export class AddUsagePage {
                             message: syncResponse,
                             buttons: [
                                 {
+                                    text: 'Neue Anwendung',
+                                    handler: () => {
+                                        this.navController.setRoot(ADD_USAGE_PAGE, {
+                                            hazardousSubstance: this.hazardousSubstance
+                                        });
+                                    }
+                                },
+                                {
                                     text: 'Zurück zum Start',
                                     handler: () => {
-                                        this.navController.push(WELCOME_PAGE);
+                                        this.navController.setRoot(WELCOME_PAGE);
                                     }
                                 }
                             ]
@@ -191,9 +200,9 @@ export class AddUsagePage {
                 return this.unitOfWork.hazardousSubstanceRepository
                     .all()
                     .pipe(
-                    tap(hazardousSubstances => {
-                        this.hazardousSubstance = hazardousSubstances.shift();
-                    })
+                        tap(hazardousSubstances => {
+                            this.hazardousSubstance = hazardousSubstances.shift();
+                        })
                     )
                     .toPromise();
             }

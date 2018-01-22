@@ -1,6 +1,6 @@
 import { Syncable } from '../interfaces';
 
-export interface RawHazardousSubstance extends Syncable {
+export interface RawHazardousSubstance {
     manufacturer_id: number;
     active: number;
     hs_number: string;

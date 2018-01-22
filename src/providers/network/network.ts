@@ -31,7 +31,7 @@ export class NetworkProvider {
             this.isOnline = false;
             this.toastCtrl
                 .create({
-                    message: 'Netzwerkverbidung verloren 😱',
+                    message: 'Netzwerkverbindung verloren 😱',
                     duration: 3000,
                     position: 'bottom'
                 })
