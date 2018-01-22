@@ -13,7 +13,6 @@ import { APP_CONFIG } from '../../app/app.config';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, tap, map } from 'rxjs/operators';
-import { HttpResponse } from '@angular/common/http/src/response';
 
 /*
   Generated class for the DataExchangeProvider provider.
