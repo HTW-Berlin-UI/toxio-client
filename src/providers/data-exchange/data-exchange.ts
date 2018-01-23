@@ -11,6 +11,7 @@ import {
 } from '../../interfaces/interfaces';
 import { APP_CONFIG } from '../../app/app.config';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, tap, map } from 'rxjs/operators';
 
@@ -92,10 +93,12 @@ export class DataExchangeProvider {
         };
     }
 
-    public postUsage(usage: Usage): Observable<Object> {
+    public postUsage(usage: Usage): Observable<string> {
+        // Test requests https://httpbin.org/post
+
         return this.http
             .post(this.appConfig.apiUrl + this.endpoints.usages, this.mapUsage(usage))
-            .pipe(tap(console.log), catchError(this.handleError));
+            .pipe(tap(console.log), catchError(this.handlePostError));
     }
 
     public getUsageResourcesFromAssets(): Observable<UsageResources> {
@@ -110,6 +113,11 @@ export class DataExchangeProvider {
             .pipe(tap(console.log), catchError(this.handleError));
     }
 
+    private handlePostError(err: HttpErrorResponse): Observable<String> {
+        console.warn(err);
+        return Observable.of(err.message);
+    }
+
     private handleError(err: HttpErrorResponse): ErrorObservable {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
@@ -120,9 +128,11 @@ export class DataExchangeProvider {
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            errorMessage = `Backend returned code ${err.status}, body was: ${err.error}`;
+            errorMessage = `Backend returned code ${err.status}, body was: ${JSON.stringify(
+                err.error
+            )}`;
         }
-        console.error(err);
+        console.warn(err);
         return new ErrorObservable(errorMessage);
     }
 }

@@ -48,8 +48,7 @@ export class UnitOfWork {
                     'Sie sind offline. Die Anwendung wird synchronisiert sobald Sie eine Verbindung mit dem Internet herstellen.'
                 );
             this.dataExchange.postUsage(usage).subscribe(response => {
-                console.log(response);
-                resolve('Syncing...');
+                resolve(response ? response : '...und erfolgreich synchronisiert.');
             });
         });
     }
