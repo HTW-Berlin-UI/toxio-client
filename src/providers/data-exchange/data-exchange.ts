@@ -56,7 +56,7 @@ export class DataExchangeProvider {
     private mapHazardousSubstances(response: RawHazardousSubstance[]): HazardousSubstance[] {
         return response.map(rawHazardousSubstance => {
             return {
-                id: rawHazardousSubstance.substance_id,
+                id: rawHazardousSubstance.hs_id,
                 hsNumber: rawHazardousSubstance.hs_number,
                 name: rawHazardousSubstance.substance_name,
                 manufacturer: `Hersteller ${rawHazardousSubstance.substance_name}`,
@@ -64,6 +64,7 @@ export class DataExchangeProvider {
                 approved: !!rawHazardousSubstance.approved,
                 substanceCAS: rawHazardousSubstance.substance_cas,
                 substanceEG: rawHazardousSubstance.substance_eg,
+                substanceID: rawHazardousSubstance.substance_id,
                 created: '',
                 updated: ''
             };
