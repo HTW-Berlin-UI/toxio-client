@@ -313,15 +313,11 @@
 
     <ion-card>
       <ion-card-header>
-        Debug
+        Daten speichern und senden
       </ion-card-header>
       <ion-card-content>
-        <p>Dirty: {{ usage.dirty }}</p>
-        <p>Touched: {{ usage.touched }}</p>
-        <p>Valid: {{ usage.valid }}</p>
-        <p>Value: </p>
-        <pre>{{ usage.value | json }}</pre>
-        <button ion-button block type="submit" [disabled]="!usage.valid">Submit</button>
+        <p padding-vertical *ngIf="!usage.valid">Die Anwendung is noch nicht vollständig. Bitte überprüfen und ergänzen Sie die eingegebenen Daten.</p>
+        <button ion-button block type="submit" [disabled]="!usage.valid">Anwendung speichern</button>
       </ion-card-content>
     </ion-card>
   </form>
