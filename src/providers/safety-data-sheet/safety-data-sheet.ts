@@ -15,7 +15,7 @@ export class SafetyDataSheetProvider {
 
     public openSafetyDataSheet(hazardousSubstance: HazardousSubstance): void {
         const path = `${this.fileSystem.applicationDirectory}www/assets/sds/`;
-        const file = 'ACT143_2015-11-27.pdf';
+        const file = `sds_substance_${hazardousSubstance.substanceID}.pdf`;
         console.log('try open file', path + file);
 
         /**
